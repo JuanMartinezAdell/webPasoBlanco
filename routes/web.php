@@ -1,8 +1,14 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Article;
+use App\Models\Product;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BillingController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +25,7 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'products' => Product::take(3)->get(),
     ]);
 });
 
@@ -32,4 +37,22 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    /*Route::get('/categories', [CategoryController::class, 'create'])
+        ->name('categories.createcategory');*/
+
+    //Route::resource('/categories', App\Http\Controllers\CategoryController::class);
 });
+
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.indexproduct');
+
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.indexarticle');
+
+Route::get('/category', [CategoryController::class, 'index'])->name('categories.indexcategory');
+Route::get('/category/create', [CategoryController::class, 'create'])->name('categories.createcategory');
+Route::post('/category', [CategoryController::class, 'store'])->name('categories.store');
+
+Route::get('/billings', [BillingController::class, 'index'])
+    ->middleware('auth')
+    ->name('billings.indexbilling');
