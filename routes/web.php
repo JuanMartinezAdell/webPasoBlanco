@@ -44,14 +44,24 @@ Route::middleware([
     //Route::resource('/categories', App\Http\Controllers\CategoryController::class);
 });
 
+Route::group(['middleware' => [
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+]], function () {
+    Route::get('/category', [CategoryController::class, 'index'])->name('categories.indexcategory');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('categories.createcategory');
+    Route::post('/category', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('categories.editcategory');
+    Route::put('/category/{category}/edit', [CategoryController::class, 'update'])->name('categories.update');
+    Route::get('/category/{category}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
+});
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.indexproduct');
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.indexarticle');
 
-Route::get('/category', [CategoryController::class, 'index'])->name('categories.indexcategory');
-Route::get('/category/create', [CategoryController::class, 'create'])->name('categories.createcategory');
-Route::post('/category', [CategoryController::class, 'store'])->name('categories.store');
+
 
 Route::get('/billings', [BillingController::class, 'index'])
     ->middleware('auth')

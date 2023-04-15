@@ -33,7 +33,7 @@ const logout = () => {
 
         <Banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="relative min-h-screen bg-gray-100 dark:bg-gray-900">
             <navbar class="navbar navbar-fixed fixed top-0 z-10 w-full">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <!-- Primary Navigation Menu -->
@@ -288,7 +288,7 @@ const logout = () => {
             <main>
                 <slot />
             </main>
-            <footer class="fixed inset-x-0 bottom-0 p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+            <footer class="absolute bottom-0 w-full p-2 bg-white shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
                 <div class="flex flex-col items-center justify-between sm:flex-row">
                     <a href="#" class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
                         <img src="../../image/logo/logo.jpg" alt="logo Paso Blanco" width="100" height="100">

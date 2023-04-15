@@ -10,14 +10,18 @@
     import FormSection from '@/Components/FormSection.vue';
     import ActionMessage from '@/Components/ActionMessage.vue';
 
-
-    const form = useForm ({
-            title: '',
-            slug:'',
+    const props = defineProps({
+        category: Object,
     });
 
-    const createCategory = () => {
-        form.post(route("categories.store"))
+    const form = useForm ({
+            id: props.category.id,
+            title: props.category.title,
+            slug: props.category.slug,
+    });
+
+    const updateCategory = () => {
+        form.put(route("categories.update", form.id))
     };
 
 </script>
@@ -27,7 +31,7 @@
         <div class="container mx-auto px-6 py-6 mt-8 text-center">
             <div class="container mx-auto px-6 py-20">
 
-                <FormSection  @submitted="createCategory">
+                <FormSection  @submitted="updateCategory">
                     <template #title>
                         Crear Categorias
                     </template>
