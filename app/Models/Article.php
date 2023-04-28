@@ -9,7 +9,6 @@ class Article extends Model
 {
 
     protected $fillable = ['title', 'slug', 'date', 'image', 'text', 'description', 'posted', 'type', 'category_id'];
-
     use HasFactory;
 
     public function category()

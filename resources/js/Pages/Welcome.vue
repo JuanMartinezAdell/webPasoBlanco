@@ -51,14 +51,38 @@ const modules = [EffectFade, Navigation, Pagination];
                 <swiper-slide class="bg-center bg-cover h-full">
                     <img class="w-full h-full lg:h-auto" src="../../image/carousel/ViregenAngustias.jpg" />
                 </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/caida.jpg" />
+                </swiper-slide>
                 <swiper-slide class="h-full">
-                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/Cautivo.jpg" />
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/cristoSangre.jpg" />
                 </swiper-slide>
                 <swiper-slide class="h-full">
                     <img class="w-full h-full lg:h-auto" src="../../image/carousel/SanJuanBnadera.jpg" />
                 </swiper-slide>
                 <swiper-slide class="h-full">
-                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/caida.jpg" />
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/cropped-logo2.jpg" />
+                </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/cautivo.jpg" />
+                </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/7.jpg" />
+                </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/8.jpg" />
+                </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/9.jpg" />
+                </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/6.jpg" />
+                </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/11.jpg" />
+                </swiper-slide>
+                <swiper-slide class="bg-center bg-cover h-full">
+                    <img class="w-full h-full lg:h-auto" src="../../image/carousel/12.jpg" />
                 </swiper-slide>
                 </swiper>
             </div>
@@ -688,7 +712,7 @@ const modules = [EffectFade, Navigation, Pagination];
             </div>
         </div>
 
-        <div class="mt-8 lg:mx-6 lg:w-1/2">
+        <div class="mt-8 pb-16 lg:mx-6 lg:w-1/2">
             <div class="mx-auto w-full overflow-hidden rounded-xl bg-white px-8 py-10 shadow-2xl dark:bg-gray-900 lg:max-w-xl">
                 <h1 class="text-2xl font-medium text-gray-700 dark:text-gray-200">Contacta con Nosotros</h1>
 

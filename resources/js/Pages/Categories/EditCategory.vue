@@ -18,6 +18,7 @@
             id: props.category.id,
             title: props.category.title,
             slug: props.category.slug,
+            image: "",
     });
 
     const updateCategory = () => {
@@ -30,7 +31,6 @@
     <AppLayout title="Category">
         <div class="container mx-auto px-6 py-6 mt-8 text-center">
             <div class="container mx-auto px-6 py-20">
-
                 <FormSection  @submitted="updateCategory">
                     <template #title>
                         Crear Categorias
@@ -76,6 +76,7 @@
                             Save
                         </PrimaryButton>
                     </template>
+
                 </FormSection>
         </div>
         </div>

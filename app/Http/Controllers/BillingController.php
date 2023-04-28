@@ -2,34 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use Stripe\Stripe;
 use Inertia\Inertia;
+use Stripe\SetupIntent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 
 class BillingController extends Controller
 {
     //
-    /*public function createSetupIntent()
+
+    public function addPaymentmethod($paymentMethod)
     {
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        $setupIntent = SetupIntent::create();
-
-        return [
-            'client_secret' => $setupIntent->client_secret,
-            'setup_intent_id' => $setupIntent->id,
-        ];
-    }*/
-
-    /* public function payment()
-    {
-        return Inertia::render('update-payment-method', [
-            'intent' => auth()->user()->createSetupIntent()
-        ]);
-    }*/
+        dd($paymentMethod);
+        auth()->user()->addPaymentmethod($paymentMethod);
+    }
 
     public function index()
     {
-
-        return Inertia::render('Billings/IndexBilling');
+        return inertia('Billings/IndexBilling', [
+            'intent' => auth()->user()->createSetupIntent()->client_secret
+        ]);
     }
 }

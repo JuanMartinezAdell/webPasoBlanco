@@ -21,18 +21,17 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return Inertia::render("Categories/CreateCategory");
+        return inertia("Categories/CreateCategory");
     }
 
     public function store(Store $request)
     {
-        sleep(1);
         Category::create($request->validated());
     }
 
     public function edit(Category $category)
     {
-        return Inertia::render("Categories/EditCategory", compact("category"));
+        return inertia("Categories/EditCategory", compact("category"));
     }
 
     public function update(Category $category, Put $request)
