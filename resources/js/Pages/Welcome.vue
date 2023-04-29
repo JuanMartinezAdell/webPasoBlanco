@@ -8,18 +8,16 @@ import NavLink from '@/Components/NavLink.vue';
 import SecundaryButton from '@/NewComponents/SecundaryButton.vue';
 import ProductVue from '@/NewComponents/ProductVue.vue';
 
-// Import Swiper Vue.js components
+// Carousel Swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
-
-// Import Swiper styles
 import "swiper/css";
 
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-// import required modules
 import { EffectFade, Navigation, Pagination } from "swiper";
+
+import { ref } from 'vue';
 
 defineProps({
     canLogin: Boolean,
@@ -28,6 +26,25 @@ defineProps({
 });
 
 const modules = [EffectFade, Navigation, Pagination];
+
+//Acordeon
+const isOpen = ref(0)
+const collapses = ref(
+    [
+        {
+          title: 'Cruces de Mayo',
+          text: 'Este fin de semana Paso Blanco montara barra en colaboracion con las otras hermandades',
+        },
+        {
+          title: 'Rezo Rosario Ermita Hermandad',
+          text: 'Esta semana con las cruces de Mayo se rezara el Santo Rosario todos los días',
+        },
+        {
+          title: 'Preparativos para las Cruces',
+          text: 'Se ruega asistencia a la proxima reunión a todos los integrantes de la hermandad para los prepartivos de las Cruces de Mayo',
+        }
+      ]
+    )
 
 </script>
 
@@ -599,45 +616,28 @@ const modules = [EffectFade, Navigation, Pagination];
         <h1 class="text-center text-4xl font-semibold text-gray-800 dark:text-white">Titulares</h1>
 
         <div class="mt-12 space-y-8">
-            <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
-                <h2 id="accordion-color-heading-1">
-                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-1" aria-expanded="true" aria-controls="accordion-color-body-1">
-                    <span>What is Flowbite?</span>
-                    <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-            <div id="accordion-color-body-1" class="hidden" aria-labelledby="accordion-color-heading-1">
-                <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
-                <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+            <o-collapse class="card rounded-lg border-2 border-gray-100 dark:border-gray-700 shadow-lg" animation="slide" v-for="(collapse, index) of collapses" :key="index" :open="isOpen == index" @open="isOpen = index">
+                <template #trigger="props">
+                    <div class="card-header flex w-full items-center justify-between p-8" role="button">
+                    <h1 class="card-header-title mt-4 text-2xl font-semibold capitalize text-gray-900 dark:text-white">
+                        {{ collapse.title }}
+                    </h1>
+                    <a class="card-header-icon rounded-full bg-blue-500 text-white">
+                        <!--o-icon :icon="props.open ? 'caret-up' : 'caret-down'"> </o-icon-->
+                        <span class="rounded-full bg-blue-500 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                        </span>
+                    </a>
+                    </div>
+                </template>
+                <div class="card-content flex w-full items-center justify-between p-8">
+                    <div class="content text-gray-700 text-base mb-4">
+                    {{ collapse.text }}
+                    </div>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="rounded-lg border-2 border-gray-100 dark:border-gray-700">
-            <button class="flex w-full items-center justify-between p-8">
-            <h1 class="font-semibold text-gray-700 dark:text-white">Novena Virgen De La Angustias</h1>
-
-            <span class="rounded-full bg-blue-500 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-            </span>
-            </button>
-        </div>
-
-        <div class="rounded-lg border-2 border-gray-100 dark:border-gray-700">
-            <button class="flex w-full items-center justify-between p-8">
-            <h1 class="font-semibold text-gray-700 dark:text-white">Días recoger tunicas Semana Santa</h1>
-
-            <span class="rounded-full bg-blue-500 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-            </span>
-            </button>
-        </div>
+            </o-collapse>
         </div>
     </div>
     </section>

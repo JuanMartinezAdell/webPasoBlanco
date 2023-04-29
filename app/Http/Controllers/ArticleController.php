@@ -29,7 +29,7 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::get();
-        return inertia("Articles/CreateArticle", compact("categories"));
+        return inertia("Articles/SaveArticle", compact("categories"));
     }
 
 
@@ -45,12 +45,13 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $categories = Category::get();
-        return inertia("Articles/EditArticle", compact("article", "categories"));
+        return inertia("Articles/SaveArticle", compact("article", "categories"));
     }
 
     public function update(Article $article, Put $request)
     {
         $article->update($request->validated());
+        //$this->upload($request, $article);
         return to_route('articles.indexarticle')->with('message', "Updated article successfully");
     }
 
@@ -69,6 +70,9 @@ class ArticleController extends Controller
             ]
         );
 
+        //dd($request['image']);
+
+
         Storage::disk("public_upload")->delete("image/article/" . $article->image);
 
         $data['image'] = $filename = time() . "." . $request['image']->extension();
@@ -76,6 +80,6 @@ class ArticleController extends Controller
         $request->image->move(public_path("image/article"), $filename);
 
         $article->update($data);
-        return to_route('articles.indexarticle')->with('message', "Upload article successfully");
+        return to_route('articles.indexarticle')->with('message', "Upload image to article successfully");
     }
 }

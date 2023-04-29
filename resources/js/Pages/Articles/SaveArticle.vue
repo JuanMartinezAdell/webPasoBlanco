@@ -15,7 +15,22 @@
     import '@oruga-ui/oruga-next/dist/oruga-full.css';
 
     const props = defineProps({
-        article: Object,
+        article: {
+            type:Object,
+            default:{
+                id: "",
+                title:"",
+                slug: "",
+                date: "",
+                text: "",
+                description: "",
+                type: "",
+                posted: "",
+                category_id: "",
+                image: "",
+            }
+
+        },
         categories: Object,
     });
 
@@ -33,13 +48,11 @@
     });
 
     const createArticle = () => {
-        form.put(route("articles.update",form.id))
+        if(form.id == "")
+            form.post(route("articles.store"))
+        else
+            form.put(route("articles.update",form.id))
     };
-
-    const uploadArticle = () => {
-        form.post(route("articles.upload",form.id))
-    };
-
 
 </script>
 
