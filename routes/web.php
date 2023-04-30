@@ -93,5 +93,5 @@ Route::group(['middleware' => [
     'verified'
 ]], function () {
     Route::get('/billings', [BillingController::class, 'index'])->name('billings.indexbilling');
-    //Route::post('/billings', [BillingController::class, 'addPaymentmethod'])->name('billings.addPaymentmethod');
+    Route::post('/billings', [BillingController::class, 'addPaymentmethod'])->name('billings.addPaymentmethod');
 });

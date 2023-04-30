@@ -61,7 +61,7 @@
                 //queremos ejecutar un metodo desde el controlador comandado de java script pasandole el id que hemos recupreado
                 //en el console log
                 console.log(setupIntent.payment_method);
-
+                addPaymentMethod(setupIntent.payment_method);
             }
 
         });
