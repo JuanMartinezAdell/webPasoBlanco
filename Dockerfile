@@ -1,23 +1,50 @@
-FROM elrincondeisma/octane:latest
+# Dockerfile
+FROM php:8.1-fpm
 
-RUN curl -sS https://getcomposer.org/installer​ | php -- \
-    --install-dir=/usr/local/bin --filename=composer
+# Instalar dependencias requeridas
+RUN apt-get update && apt-get install -y \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    unzip \
+    curl \
+    git \
+    && docker-php-ext-install pdo_mysql mbstring xml zip
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
+# Instalar Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Copiar los archivos necesarios
 WORKDIR /app
 COPY . .
 RUN rm -rf /app/vendor
 RUN rm -rf /app/composer.lock
-RUN composer install
+
+# Instalar dependencias
+RUN composer install --no-dev
+
+# Configurar Inertia
+RUN php artisan inertia:middleware
+
+# Configurar Octane
 RUN composer require laravel/octane spiral/roadrunner
+
+# Copiar env, creamos log  y vaciamos cache...
 COPY .env.example .env
 RUN mkdir -p /app/storage/logs
 RUN php artisan cache:clear
 RUN php artisan view:clear
 RUN php artisan config:clear
-RUN php artisan octane:install --server="swoole"
-CMD php artisan octane:start --server="swoole" --host="0.0.0.0"
 
+# Configurar Octane servidor swoole
+RUN php artisan octane:install --server=swoole
+RUN php artisan octane:configure
+COPY .env.example .env
+RUN mkdir -p /app/storage/logs
+
+# Exponer el puerto
 EXPOSE 8000
+
+# Iniciar el servidor Octane
+CMD ["php", "artisan", "octane:start", "--server=swoole"]
+
