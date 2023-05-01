@@ -19,7 +19,10 @@ COPY . .
 RUN rm -rf /app/vendor
 RUN rm -rf /app/composer.lock
 
+
+
 # Instalar dependencias
+RUN composer diagnose
 RUN composer install
 
 # Configurar Inertia
