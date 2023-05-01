@@ -20,7 +20,7 @@ RUN rm -rf /app/vendor
 RUN rm -rf /app/composer.lock
 
 # Instalar dependencias
-RUN composer update
+RUN composer install
 
 # Configurar Inertia
 RUN php artisan inertia:middleware
