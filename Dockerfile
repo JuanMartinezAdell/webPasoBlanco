@@ -4,6 +4,7 @@ RUN apk --no-cache upgrade && \
     apk --no-cache add bash git sudo openssh  libxml2-dev oniguruma-dev autoconf gcc g++ make npm freetype-dev libjpeg-turbo-dev libpng-dev libzip-dev
 
 # PHP: Install php extensions
+RUN apk add --no-cache libssh2 libssh2-dev openssl-dev
 RUN pecl channel-update pecl.php.net && \
     pecl install pcov ssh2 swoole && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
