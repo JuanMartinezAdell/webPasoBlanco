@@ -8,13 +8,14 @@ RUN apk update && apk add --no-cache \
     libzip-dev \
     oniguruma-dev \
     && docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
+    --with-freetype \
+    --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd pdo_mysql mysqli mbstring zip opcache soap pcntl sockets bcmath intl \
     && pecl install swoole \
     && docker-php-ext-enable swoole
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
