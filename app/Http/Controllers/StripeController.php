@@ -9,6 +9,7 @@ class StripeController extends Controller
     //
     public function getSession()
     {
+        return 'true';
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
 
         $checkout = $stripe->checkout->sessions->create([

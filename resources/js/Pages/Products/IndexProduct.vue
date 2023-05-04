@@ -24,7 +24,8 @@ export default {
 
         axios.get('getSession')
         .then(res => {
-            this.sessionId = res.data.id
+            //console.log('res');
+            //this.sessionId = res.data.id
         }).cath(err => {})
     },
     submit () {

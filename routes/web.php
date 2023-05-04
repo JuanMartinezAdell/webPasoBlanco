@@ -84,7 +84,7 @@ Route::group(['middleware' => [
 }); Ha falata de merter el catgories dentro de otro directorio para randerizarlo con resource*/
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.indexproduct');
-Route::get('/products', [StripeController::class, 'getSession'])->name('products.indexproduct');
+Route::get('/getSession', [StripeController::class, 'getSession'])->name('products.indexproduct');
 
 
 /*Route::get('/billings', [BillingController::class, 'index'])
