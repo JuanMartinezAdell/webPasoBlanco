@@ -5,6 +5,20 @@ RUN apk --no-cache upgrade && \
 
 # PHP: Install php extensions
 RUN pecl install swoole
+RUN apk update && \
+    apk add --no-cache $PHPIZE_DEPS \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libzip-dev \
+    oniguruma-dev \
+    && docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd pdo_mysql mysqli mbstring zip opcache soap pcntl sockets bcmath intl \
+    && pecl install swoole \
+    && docker-php-ext-enable swoole
+
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install mbstring xml iconv pcntl gd zip sockets pdo pdo_mysql bcmath soap intl opcache curl
 
