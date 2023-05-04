@@ -10,6 +10,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +84,8 @@ Route::group(['middleware' => [
 }); Ha falata de merter el catgories dentro de otro directorio para randerizarlo con resource*/
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.indexproduct');
+Route::get('/products', [StripeController::class, 'getSession'])->name('products.indexproduct');
+
 
 /*Route::get('/billings', [BillingController::class, 'index'])
     ->middleware('auth')

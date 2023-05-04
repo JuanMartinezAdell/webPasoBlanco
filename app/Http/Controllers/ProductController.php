@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-namespace App\Http\Controllers;
-
 use Inertia\Inertia;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;

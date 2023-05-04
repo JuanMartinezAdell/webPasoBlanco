@@ -14,11 +14,14 @@ class BillingController extends Controller
 {
     //
 
-    public function addPaymentmethod($paymentMethod)
+    public function addPaymentmethod(Request $request)
     {
-        dd($paymentMethod);
+        //payment method debe de recibir la informacion del console log para asignarsela al usario
+        dd($request);
+        $paymentMethod = $request->input('payment_method');
         auth()->user()->addPaymentmethod($paymentMethod);
     }
+
 
     public function index()
     {

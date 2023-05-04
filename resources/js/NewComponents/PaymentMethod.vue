@@ -12,6 +12,7 @@
     import SectionTitleVue from '../Components/SectionTitle.vue';
     import axios from 'axios';
 
+
     const stripeKey = import.meta.env.VITE_STRIPE_KEY;
 
     const props = defineProps({
@@ -59,9 +60,11 @@
                 // The card has been verified successfully...
                 // @this.addPaymentMethod(setupIntent.payment_method);
                 //queremos ejecutar un metodo desde el controlador comandado de java script pasandole el id que hemos recupreado
-                //en el console log
-                console.log(setupIntent.payment_method);
-                addPaymentMethod(setupIntent.payment_method);
+                //en el console log en el intento con lo que hay en el campo pàyment_method
+                //console.log(setupIntent.payment_method);
+                //this.addPaymentMethod(setupIntent.payment_method);
+
+
             }
 
         });
@@ -71,7 +74,9 @@
 
 
 <template>
-    <div class="pt-12 pb-8 md:grid md:grid-cols-3 md:gap-6">
+
+<div class="container mx-auto px-6 py-1 pb-20">
+    <div class="pt-12 pb-8 py-4 md:grid md:grid-cols-3 md:gap-6">
         <section class="md:col-span-1 flex justify-between">
             <div class="px-4 sm:px-0">
                 <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -84,10 +89,11 @@
             </div>
         </section>
 
-        <section class="bg-white rounded shadow-lg md:mt-0 md:col-span-2 ">
+        <section class="bg-white rounded shadow-lg md:mt-0 md:col-span-2">
             <div class="mt-5 px-8 py-6">
                 <div class="flex-1">
                     <input class="form-control mb-4" id="card-holder-name" placeholder="Nombre del titular de la tarjeta">
+                    <!-- Stripe Elements Placeholder -->
                     <div class="form-control" id="card-element"></div>
                     <span id="card-error-message" class="text-red-600 text-sm mb-2"></span>
                 </div>
@@ -100,6 +106,7 @@
                 </div>
             </footer>
         </section>
+    </div>
     </div>
 </template>
 

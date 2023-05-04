@@ -548,36 +548,36 @@
         </div>
     <!-- /Graficas -->
     <!-- Barras Prpgress-->
-    <div class="flex justify-between mb-1">
-        <span class="text-base font-medium text-blue-700 dark:text-white">Cuotas pagadas</span>
-        <span class="text-sm font-medium text-blue-700 dark:text-white">35%</span>
+    <div class="flex justify-between mb-1 pt-4">
+        <span class="text-lg font-medium text-blue-700 dark:text-white">Cuotas pagadas</span>
+        <span class="text-lg font-medium text-blue-700 dark:text-white">35%</span>
     </div>
-    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 35%"></div>
-    </div>
-
-    <div class="flex justify-between mb-1">
-        <span class="text-base font-medium text-yellow-700 dark:text-white">Cuotas pendiente Pago</span>
-        <span class="text-sm font-medium text-yellow-700 dark:text-white">75%</span>
-    </div>
-    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 75%"></div>
+    <div class="w-full h-4 bg-gray-200 rounded-full dark:bg-gray-700">
+        <div class="bg-blue-600 h-4 rounded-full" style="width: 35%"></div>
     </div>
 
-    <div class="flex justify-between mb-1">
+    <div class="flex justify-between mb-1 pt-4">
+        <span class="text-lg font-medium text-yellow-700 dark:text-white">Cuotas pendiente Pago</span>
+        <span class="text-lg font-medium text-yellow-700 dark:text-white">75%</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+        <div class="bg-yellow-600 h-4 rounded-full" style="width: 75%"></div>
+    </div>
+
+    <div class="flex justify-between mb-1 pt-4">
         <span class="text-base font-medium text-green-700 dark:text-white">Gastos</span>
         <span class="text-sm font-medium text-green-700 dark:text-white">45%</span>
     </div>
-    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="bg-green-600 h-2.5 rounded-full" style="width: 45%"></div>
+    <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+        <div class="bg-green-600 h-4 rounded-full" style="width: 45%"></div>
     </div>
 
-    <div class="flex justify-between mb-1">
+    <div class="flex justify-between mb-1 pt-4">
         <span class="text-base font-medium text-red-700 dark:text-white">Beneficos</span>
         <span class="text-sm font-medium text-red-700 dark:text-white">65%</span>
     </div>
-    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-        <div class="bg-red-600 h-2.5 rounded-full" style="width: 65%"></div>
+    <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+        <div class="bg-red-600 h-4 rounded-full" style="width: 65%"></div>
     </div>
     <!-- /Barras Prpgress-->
         <!-- ./Client Table -->
