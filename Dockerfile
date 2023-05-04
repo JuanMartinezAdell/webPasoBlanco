@@ -34,9 +34,9 @@ COPY .env.example .env
 RUN mkdir -p /app/storage/logs
 
 # Instala las dependencias de PHP y NPM, y compila los assets
-RUN composer install --no-dev --optimize-autoloader && \
-    npm install && \
-    npm run prod
+RUN composer install --no-dev --optimize-autoloader
+RUN npm install
+RUN npm run prod
 
 # Configura la conexión a la base de datos en el archivo .env
 ENV DB_CONNECTION=mysql
