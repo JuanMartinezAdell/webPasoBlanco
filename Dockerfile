@@ -7,6 +7,7 @@ RUN apk update && apk add --no-cache \
     libpng-dev \
     libzip-dev \
     oniguruma-dev \
+    curl \
     && docker-php-ext-configure gd \
     --with-freetype \
     --with-jpeg \
