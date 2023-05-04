@@ -1,7 +1,7 @@
 FROM php:8.1.17-fpm-alpine
 
 RUN apk --no-cache upgrade && \
-    apk --no-cache add bash git sudo openssh libxml2-dev oniguruma-dev autoconf gcc g++ make npm freetype-dev libjpeg-turbo-dev libpng-dev libzip-dev
+    apk --no-cache add bash git sudo openssh libxml2-dev oniguruma-dev autoconf gcc g++ make npm freetype-dev libjpeg-turbo-dev libpng-dev libzip-dev libmcrypt-dev
 
 # PHP: Install php extensions
 RUN pecl install swoole
