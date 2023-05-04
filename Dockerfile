@@ -40,11 +40,11 @@ RUN composer install --no-dev --optimize-autoloader && \
 
 # Configura la conexión a la base de datos en el archivo .env
 ENV DB_CONNECTION=mysql
-ENV DB_HOST=db
+ENV DB_HOST=mysql
 ENV DB_PORT=3306
-ENV DB_DATABASE=my_database
-ENV DB_USERNAME=my_user
-ENV DB_PASSWORD=my_password
+ENV DB_DATABASE=webpasoblanco
+ENV DB_USERNAME=root
+ENV DB_PASSWORD=password
 
 # Crea la base de datos y ejecuta las migraciones
 RUN php artisan migrate --force
