@@ -18,7 +18,7 @@ const props = defineProps({
     <AppLayout title="Article">
         <div class="container py-20">
 
-                <SubcriptionMethod />
+                <!--SubcriptionMethod /-->
 
                 <PaymentMethod :intent="intent" />
 

@@ -1,4 +1,4 @@
-<script setup>
+<!--script setup>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { StripeCheckout } from '@vue-stripe/vue-stripe';
 
@@ -25,7 +25,7 @@ function submit(priceId) {
   lineItems[0].price = selectedPriceId;
   redirectToCheckout.call(this);
 }
-</script>
+</!--script-->
 
 <template>
     <!-- Metodo de pago 1 -->

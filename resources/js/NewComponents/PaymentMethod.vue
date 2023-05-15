@@ -5,18 +5,18 @@
     import Checkbox from '@/Components/Checkbox.vue';
     import InputError from '@/Components/InputError.vue';
     import InputLabel from '@/Components/InputLabel.vue';
+    import Primarybutton from '@/Components/Primarybutton.vue';
     import DisabledButton from '@/NewComponents/DisabledButton.vue';
     import TextInput from '@/Components/TextInput.vue';
     import FormSection from '@/Components/FormSection.vue';
     import ActionMessage from '@/Components/ActionMessage.vue';
     import SectionTitleVue from '../Components/SectionTitle.vue';
-    import axios from 'axios';
-
 
     const stripeKey = import.meta.env.VITE_STRIPE_KEY;
 
     const props = defineProps({
         intent: String,
+        paymentMethod: Object,
         });
 
     onMounted(() => {
@@ -30,9 +30,6 @@
 
         cardButton.addEventListener('click', async (e) => {
 
-            //Deshabilitar Boton
-            cardButton.disabled = true;
-
             const clientSecret = cardButton.dataset.secret;
 
             const { setupIntent, error } = await stripe.confirmCardSetup(
@@ -44,8 +41,6 @@
                 }
             );
 
-            cardButton.disabled = false;
-
             if (error) {
                 // Display "error.message" to the user...
                 let span = document.getElementById('card-error-message');
@@ -56,15 +51,14 @@
                 // Limpiar formulario
                 cardHolderName.value = '';
                 cardElement.clear();
-
-                // The card has been verified successfully...
-                // @this.addPaymentMethod(setupIntent.payment_method);
-                //queremos ejecutar un metodo desde el controlador comandado de java script pasandole el id que hemos recupreado
-                //en el console log en el intento con lo que hay en el campo pàyment_method
                 //console.log(setupIntent.payment_method);
-                //this.addPaymentMethod(setupIntent.payment_method);
-
-
+                const paymentMethod = setupIntent.payment_method;
+                try {
+                    const response = await router.post(route('billings.payment'), { paymentMethod });
+                    console.log(response.data);
+                } catch (error) {
+                    console.log(error);
+                }
             }
 
         });
@@ -100,13 +94,39 @@
             </div>
             <footer class="px-8 py-6 bg-gray-50 border-t border-gray-200">
                 <div class="flex justify-end">
-                    <DisabledButton id="card-button" :data-secret="intent">
-                        Update Payment Method
-                    </DisabledButton>
+                    <Primarybutton id="card-button" :data-secret="intent">
+                        Actualizar metodo de pago
+                    </Primarybutton>
                 </div>
             </footer>
+        </section>
+
+        <!-- Tarjetas -->
+        <section class="md:col-span-1 flex justify-between">
+            <div class="px-4 sm:px-0">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    Métodos de Pago
+                </h3>
+
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    Información de las tarjetas agregadas
+                </p>
+            </div>
+
+        </section>
+        <section class="bg-white rounded shadow-lg md:mt-0 md:col-span-2">
+            <header class="px-8 py-6 bg-gray-50 border-t border-gray-200">
+                <h1 class="text-gray-700 text-lg font-semibold">Tarjetas Cuenta</h1>
+            </header>
+
+            <div class="px-8 py-6">
+                <ul>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
         </section>
     </div>
     </div>
 </template>
-

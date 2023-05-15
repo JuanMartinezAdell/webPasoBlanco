@@ -83,19 +83,43 @@ Route::group(['middleware' => [
      Route::resource('/article', App\Http\Controllers\ArticleController::class);
 }); Ha falata de merter el catgories dentro de otro directorio para randerizarlo con resource*/
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.indexproduct');
-Route::get('/getSession', [StripeController::class, 'getSession'])->name('products.indexproduct');
+#Venta productos
+/*Route::get('/products', function () {
+    return Inertia::render('Welcome');
+});
+
+Route::get('/cancel', function () {
+    return Inertia::render('products.indexproduct');
+});
+
+Route::get('/succes', function () {
+    return Inertia::render('products.indexproduct');
+});
+
+Route::get('/getSession', [StripeController::class, 'getSession']);*/
+
+Route::get('/products', [StripeController::class, 'createCheckoutSession'])->name('products.indexproduct');
+
+/* Fin venta */
 
 
 /*Route::get('/billings', [BillingController::class, 'index'])
     ->middleware('auth')
     ->name('billings.indexbilling');*/
 
+// Es necesario arregolar esto no fucniona bien si no esta en stripe sigue
 Route::group(['middleware' => [
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ]], function () {
-    Route::get('/billings', [BillingController::class, 'index'])->name('billings.indexbilling');
-    Route::post('/billings', [BillingController::class, 'addPaymentmethod'])->name('billings.addPaymentmethod');
+    Route::get('/billings', [BillingController::class, 'render'])->name('billings.indexbilling');
+    Route::get('/addpay', [BillingController::class, 'addPay'])->name('billing.pay');
+});
+
+Route::prefix('billing')->middleware('auth')->group(function () {
+    Route::controller(BillingController::class)->group(function () {
+        Route::get('billing')->name('billings.indexbilling');
+        Route::post('billing', 'update')->name('billings.payment');
+    });
 });
