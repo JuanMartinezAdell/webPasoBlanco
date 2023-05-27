@@ -637,38 +637,42 @@ const collapses = ref(
                 :modules="modules"
                 class="mySwiper"
             >
-                <swiper-slide class="p-10">
-                    <p class="flex items-center text-center text-gray-500 lg:mx-8">
-                        45 Al ver lo que hizo Jesús, muchos de los judíos que habían ido a casa de María creyeron en él. 46 Pero otros fueron a ver a los fariseos y les contaron lo que Jesús había hecho. 47 Los sumos sacerdotes y los fariseos convocaron un Consejo y dijeron: "¿Qué hacemos? Porque este hombre realiza muchos signos. 48 Si lo dejamos seguir así, todos creerán en él, y los romanos vendrán y destruirán nuestro Lugar santo y nuestra nación". 49 Uno de ellos, llamado Caifás, que era Sumo Sacerdote ese año, les dijo: "Ustedes no comprenden nada. 50 ¿No les parece preferible que un solo hombre muera por el pueblo y no que perezca la nación entera?". 51 No dijo eso por sí mismo, sino que profetizó como Sumo Sacerdote que Jesús iba a morir por la nación, 52 y no solamente por la nación, sino también para congregar en la unidad a los hijos de Dios que estaban dispersos. 53 A partir de ese día, resolvieron que debían matar a Jesús. 54 Por eso él no se mostraba más en público entre los judíos, sino que fue a una región próxima al desierto, a una ciudad llamada Efraín, y allí permaneció con sus discípulos.
-                        <br>55 Como se acercaba la Pascua de los judíos, mucha gente de la región había subido a Jerusalén para purificarse. 56 Buscaban a Jesús y se decían unos a otros en el Templo: "¿Qué les parece, vendrá a la fiesta o no?". 57 Los sumos sacerdotes y los fariseos habían dado orden de que si alguno conocía el lugar donde él se encontraba, lo hiciera saber para detenerlo.
+                <swiper-slide>
+                    <p class="flex items-center text-center text-gray-500 p-4 lg:mx-8 lg:p-4">
+                        Virgen de las Angustias. Tú que sufurste tanto benditan sean tus lágrimas bendito sea tu llanto.
+                        Virgen de las Angustias Madre del Redentor apiádate de nosotros y concédenos tu perdón.
+                        <br><br>¡Ay! Virgen de las Angustias con Jesús  muerto en tus brazops el corazón se me para y se rompe en mil pedazos.
+                        <br><br>¡Ay! Virgen de las Angustias tu rostro lo va espresando pena, dolor y tristeza caminando hacia el carvario.
+                        <br><br>¡Ay! Viregen de las Angustias quisiera decirte tanto que la voz se me quiebra y solo queda mi llanto.
+                        <br><br>¡Ay! Virgen de las Angustias Santa Madre del Señor...
                     </p>
 
                     <div class="mt-8 flex flex-col items-center justify-center">
                         <img class="h-14 w-14 rounded-full object-cover" src="../../image/emoji/SanJuan.jpg" alt="" />
 
                         <div class="mt-4 text-center">
-                            <h1 class="font-semibold text-gray-800 dark:text-white">Evangelio según San Juan. La conspiración contra Jesús</h1>
-                            <span class="text-sm text-gray-500 dark:text-gray-400">Mt. 26. 1-5  Mc. 14. 1-2  Lc. 22. 1-2</span>
+                            <h1 class="font-semibold text-gray-800 dark:text-white pb-2">Himno a Ntra. Sra. de las Angustias </h1>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Francsico Herranz Blesa</span>
                         </div>
                     </div>
                 </swiper-slide>
-                <swiper-slide class="p-10">
-                    <p class="flex items-center text-center text-gray-500 lg:mx-8">
-                        45 Al ver lo que hizo Jesús, muchos de los judíos que habían ido a casa de María creyeron en él. 46 Pero otros fueron a ver a los fariseos y les contaron lo que Jesús había hecho. 47 Los sumos sacerdotes y los fariseos convocaron un Consejo y dijeron: "¿Qué hacemos? Porque este hombre realiza muchos signos. 48 Si lo dejamos seguir así, todos creerán en él, y los romanos vendrán y destruirán nuestro Lugar santo y nuestra nación". 49 Uno de ellos, llamado Caifás, que era Sumo Sacerdote ese año, les dijo: "Ustedes no comprenden nada. 50 ¿No les parece preferible que un solo hombre muera por el pueblo y no que perezca la nación entera?". 51 No dijo eso por sí mismo, sino que profetizó como Sumo Sacerdote que Jesús iba a morir por la nación, 52 y no solamente por la nación, sino también para congregar en la unidad a los hijos de Dios que estaban dispersos. 53 A partir de ese día, resolvieron que debían matar a Jesús. 54 Por eso él no se mostraba más en público entre los judíos, sino que fue a una región próxima al desierto, a una ciudad llamada Efraín, y allí permaneció con sus discípulos.
-                        <br>55 Como se acercaba la Pascua de los judíos, mucha gente de la región había subido a Jerusalén para purificarse. 56 Buscaban a Jesús y se decían unos a otros en el Templo: "¿Qué les parece, vendrá a la fiesta o no?". 57 Los sumos sacerdotes y los fariseos habían dado orden de que si alguno conocía el lugar donde él se encontraba, lo hiciera saber para detenerlo.
+                <swiper-slide>
+                    <p class="flex items-center text-center text-gray-500 p-4 lg:mx-8">
+                        27 La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.
+                        <br>28 Habéis oído que yo os he dicho: Voy, y vengo a vosotros. Si me amarais, os habríais regocijado, porque he dicho que voy al Padre; porque el Padre mayor es que yo.
                     </p>
 
                     <div class="mt-8 flex flex-col items-center justify-center">
                         <img class="h-14 w-14 rounded-full object-cover" src="../../image/emoji/SanJuan.jpg" alt="" />
 
                         <div class="mt-4 text-center">
-                            <h1 class="font-semibold text-gray-800 dark:text-white">Evangelio según San Juan. La conspiración contra Jesús</h1>
-                            <span class="text-sm text-gray-500 dark:text-gray-400">Mt. 26. 1-5  Mc. 14. 1-2  Lc. 22. 1-2</span>
+                            <h1 class="font-semibold text-gray-800 dark:text-white">Jesús, el camino del Padre. La Promesa del Espíritu Santo</h1>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Juan 14:27-28</span>
                         </div>
                     </div>
                 </swiper-slide>
-                <swiper-slide class="p-10">
-                    <p class="flex items-center text-center text-gray-500 lg:mx-8">
+                <swiper-slide>
+                    <p class="flex items-center text-center text-gray-500 p-4 lg:mx-8">
                         45 Al ver lo que hizo Jesús, muchos de los judíos que habían ido a casa de María creyeron en él. 46 Pero otros fueron a ver a los fariseos y les contaron lo que Jesús había hecho. 47 Los sumos sacerdotes y los fariseos convocaron un Consejo y dijeron: "¿Qué hacemos? Porque este hombre realiza muchos signos. 48 Si lo dejamos seguir así, todos creerán en él, y los romanos vendrán y destruirán nuestro Lugar santo y nuestra nación". 49 Uno de ellos, llamado Caifás, que era Sumo Sacerdote ese año, les dijo: "Ustedes no comprenden nada. 50 ¿No les parece preferible que un solo hombre muera por el pueblo y no que perezca la nación entera?". 51 No dijo eso por sí mismo, sino que profetizó como Sumo Sacerdote que Jesús iba a morir por la nación, 52 y no solamente por la nación, sino también para congregar en la unidad a los hijos de Dios que estaban dispersos. 53 A partir de ese día, resolvieron que debían matar a Jesús. 54 Por eso él no se mostraba más en público entre los judíos, sino que fue a una región próxima al desierto, a una ciudad llamada Efraín, y allí permaneció con sus discípulos.
                         <br>55 Como se acercaba la Pascua de los judíos, mucha gente de la región había subido a Jerusalén para purificarse. 56 Buscaban a Jesús y se decían unos a otros en el Templo: "¿Qué les parece, vendrá a la fiesta o no?". 57 Los sumos sacerdotes y los fariseos habían dado orden de que si alguno conocía el lugar donde él se encontraba, lo hiciera saber para detenerlo.
                     </p>

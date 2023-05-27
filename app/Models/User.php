@@ -12,6 +12,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\Subscription;
 
 
 class User extends Authenticatable
@@ -71,5 +72,18 @@ class User extends Authenticatable
                 $customer->syncStripeCustomerDetails();
             }
         }));
+    }
+
+    public function plans()
+    {
+        return $this->hasOneThrough(
+            Plan::class,
+            Subcription::class,
+            'user_id',
+            'stripe_id',
+            'id',
+            'stripe_plan'
+        )->whereNull('subcriptions.ends_at')
+            ->withDefault(Plan::free()->toArray());
     }
 }

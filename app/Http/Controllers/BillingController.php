@@ -17,7 +17,7 @@ class BillingController extends Controller
 {
     //
 
-    /* public function addPaymentmethod(Request $request)
+    public function addPaymentmethod(Request $request)
     {
         //payment method debe de recibir la informacion del console log para asignarsela al usario
         //dd($request);
@@ -25,16 +25,29 @@ class BillingController extends Controller
         $checkout = auth()->user()->addPaymentmethod($paymentMethod);
 
         return $checkout;
-    }*/
+    }
 
 
     public function render()
     {
         return inertia('Billings/IndexBilling', [
             'intent' => auth()->user()->createSetupIntent()->client_secret,
-            'paymentMethods' => auth()->user()->paymentmethods(),
+            'paymentMethods' => auth()->user()->paymentMethods(),
         ]);
     }
+
+    /* public function add(): RedirectResponse
+    {
+        $this->validate(request(), [
+            "paymentMethod" => "required|string|starts_with:pm_|max:50"
+        ]);
+
+        dd(request()->input());
+
+        auth()->user()->addPaymentMethod(request(key: "paymentMethod"));
+
+        return back();
+    }*/
 
     public function update(): RedirectResponse
     {
@@ -45,6 +58,13 @@ class BillingController extends Controller
         //dd(request()->input());
 
         auth()->user()->updateDefaultPaymentMethod(request(key: "paymentMethod"));
+
+        return back();
+    }
+
+    public function delete(): RedirectResponse
+    {
+        auth()->user()->deletePaymentMethod(request(key: "paymentMethod"));
 
         return back();
     }

@@ -14,58 +14,6 @@
 
     const stripeKey = import.meta.env.VITE_STRIPE_KEY;
 
-    const props = defineProps({
-        intent: String,
-        //paymentMethod: Object,
-        });
-
-    onMounted(() => {
-        const stripe = Stripe(`${stripeKey}`);
-        const elements = stripe.elements();
-        const cardElement = elements.create('card');
-        cardElement.mount('#card-element');
-
-        const cardHolderName = document.getElementById('card-holder-name');
-        const cardButton = document.getElementById('card-button');
-
-        cardButton.addEventListener('click', async (e) => {
-
-            const clientSecret = cardButton.dataset.secret;
-
-            const { setupIntent, error } = await stripe.confirmCardSetup(
-                clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        //billing_details: { name: cardHolderName.value },
-                        billing_details: props.billingDetails,
-                    }
-                }
-            );
-
-
-            if (error) {
-                // Display "error.message" to the user...
-                let span = document.getElementById('card-error-message');
-
-                span.textContent = error.message;
-
-            } else {
-                // Limpiar formulario
-                cardHolderName.value = '';
-                cardElement.clear();
-                //console.log(setupIntent.payment_method);
-                const paymentMethod = setupIntent.payment_method;
-                //console.log(paymentMethod);
-                try {
-                    const response = await router.post(route('billings.payment'), { paymentMethod });
-                    //console.log(response.data);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-
-        });
-    });
 
 </script>
 

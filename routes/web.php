@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\PlanViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,3 +124,8 @@ Route::prefix('billing')->middleware('auth')->group(function () {
         Route::post('billing', 'update')->name('billings.payment');
     });
 });
+
+Route::get('/plans', [PlanViewController::class, 'index'])->name('plans.indexplan');
+Route::post('/plans/checkout/{slug}', [PlanViewController::class, 'checkout'])->name('checkout.plan');
+
+Route::get('/subcriptions/intent', [StripeController::class, 'render'])->name('subcription.checkout');

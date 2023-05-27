@@ -1,31 +1,8 @@
-<!--script setup>
+<script setup>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { StripeCheckout } from '@vue-stripe/vue-stripe';
-
-const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
-let loading = false;
-const successURL = 'your-success-url';
-const cancelURL = 'your-cancel-url';
-
-let selectedPriceId='';
 
 
-const lineItems = {
-    price: 'selectedPriceId',
-    quantity: 1,
-};
-
-function redirectToCheckout() {
-  this.$refs.checkoutRef.redirectToCheckout();
-}
-
-function submit(priceId) {
-  console.log('priceId');
-  selectedPriceId = priceId;
-  lineItems[0].price = selectedPriceId;
-  redirectToCheckout.call(this);
-}
-</!--script-->
+</script>
 
 <template>
     <!-- Metodo de pago 1 -->
@@ -154,13 +131,6 @@ function submit(priceId) {
                         </PrimaryButton>
                 </div>
             </div>
-            <stripe-checkout ref="checkoutRef"
-                :pk="publishableKey"
-                :line-items="lineItems"
-                :success-url="successURL"
-                :cancel-url="cancelURL"
-                @loading="loading = $event"
-            />
         </div>
     </div>
 </template>

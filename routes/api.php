@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+//Route::get('/user', [App\Http\Controllers\Auth\UserController::class, 'getUser']);
+
+//Route::get('/plans', [App\Http\Controllers\PlanController::class, 'getPlans']);
+//Route::get('/plans/{plan}/checkout', [App\Http\Controllers\PlanController::class, 'checkout'])->name('checkout.slug');
