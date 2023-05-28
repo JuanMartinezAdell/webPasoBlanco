@@ -72,60 +72,27 @@ Route::group(['middleware' => [
     Route::post('/article/upload/{article}', [ArticleController::class, 'upload'])->name('articles.upload');
 });
 
-/*Route::group([
-    'prefix' => 'categories',
-    'middleware' => [
-        'auth:sanctum',
-        config('jetstream.auth_session'),
-        'verified',
-    ]
-], function () {
-    Route::resource('/category', App\Http\Controllers\CategoryController::class);
-     Route::resource('/article', App\Http\Controllers\ArticleController::class);
-}); Ha falata de merter el catgories dentro de otro directorio para randerizarlo con resource*/
 
-#Venta productos
-/*Route::get('/products', function () {
-    return Inertia::render('Welcome');
-});
-
-Route::get('/cancel', function () {
-    return Inertia::render('products.indexproduct');
-});
-
-Route::get('/succes', function () {
-    return Inertia::render('products.indexproduct');
-});
-
-Route::get('/getSession', [StripeController::class, 'getSession']);*/
 
 Route::get('/products', [StripeController::class, 'createCheckoutSession'])->name('products.indexproduct');
 
 /* Fin venta */
 
 
-/*Route::get('/billings', [BillingController::class, 'index'])
-    ->middleware('auth')
-    ->name('billings.indexbilling');*/
-
-// Es necesario arregolar esto no fucniona bien si no esta en stripe sigue
-Route::group(['middleware' => [
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-]], function () {
-    Route::get('/billings', [BillingController::class, 'render'])->name('billings.indexbilling');
-    Route::get('/addpay', [BillingController::class, 'addPay'])->name('billing.pay');
-});
-
-Route::prefix('billing')->middleware('auth')->group(function () {
+Route::prefix('billings')->middleware('auth')->group(function () {
     Route::controller(BillingController::class)->group(function () {
-        Route::get('billing')->name('billings.indexbilling');
-        Route::post('billing', 'update')->name('billings.payment');
+        Route::get('', 'render')->name('billings.indexbilling');
+        Route::post('', 'update')->name('billings.payment');
     });
 });
 
-Route::get('/plans', [PlanViewController::class, 'index'])->name('plans.indexplan');
-Route::post('/plans/checkout/{slug}', [PlanViewController::class, 'checkout'])->name('checkout.plan');
+//Subcripciones
 
-Route::get('/subcriptions/intent', [StripeController::class, 'render'])->name('subcription.checkout');
+Route::prefix('plans')->middleware('auth')->group(function () {
+    Route::controller(PlanViewController::class)->group(function () {
+        Route::get('', 'index')->name('plans.indexplan');
+        Route::post('checkout/{slug}', 'checkout')->name('checkout.plan');
+        Route::get('checkout/{slug}', 'checkout')->name('checkout.plan');
+        Route::post('{slug}', 'createSubcription')->name('subcription.payment');
+    });
+});

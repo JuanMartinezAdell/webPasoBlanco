@@ -2,6 +2,7 @@
     import AppLayout from '@/Layouts/AppLayout.vue';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
     import { onMounted } from 'vue';
+    import { router } from '@inertiajs/vue3'
 
     const stripeKey = import.meta.env.VITE_STRIPE_KEY;
 
@@ -25,17 +26,19 @@
         cardButton.addEventListener('click', async (e) => {
 
             const clientSecret = cardButton.dataset.secret;
+            const slug = e.target.dataset.slug;
+
+            console.log(clientSecret);
 
             const { setupIntent, error } = await stripe.confirmCardSetup(
-               /* clientSecret, {
+               clientSecret, {
                     payment_method: {
                         card: cardElement,
-                        //billing_details: { name: cardHolderName.value },
+                        billing_details: { name: cardHolderName.value },
                         billing_details: props.billingDetails,
                     }
-                }*/
+                }
             );
-
 
             if (error) {
                 // Display "error.message" to the user...
@@ -44,20 +47,21 @@
                 span.textContent = error.message;
 
             } else {
+                // enviar peticion al servidor para suscribir al usuario
                 // Limpiar formulario
                 cardHolderName.value = '';
                 cardElement.clear();
-                //console.log(setupIntent.payment_method);
-                //const paymentMethod = setupIntent.payment_method;
-                //console.log(paymentMethod);
+                console.log(setupIntent);
+                const paymentMethod = setupIntent.payment_method;
+                console.log(paymentMethod);
+                //tengo que pasrale el paymethod y el plan al controlador
                 try {
-                    //const response = await router.post(route('billings.payment'), { paymentMethod });
-                    //console.log(response.data);
+                    const response = await router.post(route('subcription.payment', { slug }), { paymentMethod });
+                    console.log(response.data);
                 } catch (error) {
                     console.log(error);
                 }
             }
-
         });
     });
 
@@ -92,7 +96,7 @@
                         </div>
                         <footer class="px-8 py-6 bg-gray-50 border-t border-gray-200">
                             <div class="flex justify-end">
-                                <PrimaryButton id="card-button" :data-secret="intent">
+                                <PrimaryButton id="card-button" :data-secret="intent" :data-slug="plan.slug">
                                     Pagar Cuota
                                 </PrimaryButton>
                             </div>

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Resources\PlanResource;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Resources\PlanResource;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class PlanViewController extends Controller
 {
@@ -24,11 +25,28 @@ class PlanViewController extends Controller
 
     public function checkout($slug)
     {
-        //Probar hacer un redirec para corregir el erorr de recargar la pagina
+        $plan = Plan::where('slug', $slug)->first();
+        //dd($plan);
+
+        return inertia('Plans/chekcoutPlan', [
+            'plan' => $plan,
+            'intent' => auth()->user()->createSetupIntent()->client_secret,
+            'paymentMethods' => auth()->user()->paymentMethods(),
+        ]);
+    }
+
+    public function createSubcription($slug): RedirectResponse
+    {
+        $this->validate(request(), [
+            "paymentMethod" => "required|string|starts_with:pm_|max:50"
+        ]);
+
         $plan = Plan::where('slug', $slug)->first();
 
-        return Inertia::render('Plans/chekcoutPlan', [
-            'plan' => $plan,
-        ]);
+        auth()->user()->newSubscription('Suscripciones Paso Blanco', $plan->stripe_id)
+            ->create(request(key: "paymentMethod"));
+
+
+        return Redirect::route('plans.indexplan');
     }
 }
