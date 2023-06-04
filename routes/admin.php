@@ -28,9 +28,9 @@ Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboa
 Route::get('/diary', [AgendaController::class, 'index'])->name('diary.index');
 Route::get('/diary/create', [AgendaController::class, 'create'])->name('diary.create');
 Route::post('/diary', [AgendaController::class, 'store'])->name('diary.store');
-Route::get('/diary/{user}/edit', [ContactController::class, 'edit'])->name('diary.edit');
-Route::put('/diary/{user}/edit', [ContactController::class, 'update'])->name('cdiaryupdate');
-Route::get('/diary/{user}/delete', [ContactController::class, 'destroy'])->name('diary.destroy');
+Route::get('/diary/{user}/edit', [AgendaController::class, 'edit'])->name('diary.edit');
+Route::put('/diary/{user}/edit', [AgendaController::class, 'update'])->name('diary.update');
+Route::get('/diary/{user}/delete', [AgendaController::class, 'destroy'])->name('diary.destroy');
 
 
 

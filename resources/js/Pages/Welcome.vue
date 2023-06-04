@@ -1471,7 +1471,10 @@ const collapses = ref([
                             >
                                 <div
                                     class="h-56 bg-cover bg-center p-4"
-                                    style="background-image: url({{ product.image }}) "
+                                    :style="{
+                                        backgroundImage:
+                                            'url(' + product.image + ')',
+                                    }"
                                 >
                                     <span
                                         class="bg-gray-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300"
