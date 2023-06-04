@@ -13,6 +13,6 @@ class Tag extends Model
 
     public function articles()
     {
-        $this->hasMany(Article::class);
+        $this->hasMany(Post::class);
     }
 }

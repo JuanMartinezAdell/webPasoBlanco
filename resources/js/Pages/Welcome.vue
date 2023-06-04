@@ -1,6 +1,8 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import PlanMethod from '@/NewComponents/PlanMethod.vue';
+
 import AuthenticationCardNew from '@/NewComponents/AuthenticationCardVue.vue';
 import AuthenticationCardLogoNew from '@/NewComponents/AuthenticationCardLogo.vue';
 import FooterVue from '@/NewComponents/FooterVue.vue';
@@ -24,6 +26,7 @@ defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     products: Object,
+    plan:  Object,
 });
 
 const modules = [EffectFade, Navigation, Pagination];
@@ -131,6 +134,7 @@ const collapses = ref(
             Disfruta de los beneficios de la paltaforma online estando informado en todo momento y teniendo acceso a todos los recursos del paso desde
             fototgrafias  hasta las últimas novedades y eventos.
         </p>
+
 
         <!--div class="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:mt-12 xl:gap-12">
         <div class="w-full space-y-8 rounded-lg border border-gray-100 p-8 text-center dark:border-gray-700">
@@ -247,7 +251,7 @@ const collapses = ref(
                 </div>
             </div>
 
-            <!---Ultimo Card -->
+            <!-- Ultimo Card -->
             <div class="relative group md:w-6/12 lg:w-7/12">
                 <div aria-hidden="true" class="absolute top-0 w-full h-full rounded-2xl bg-white shadow-2xl transition duration-500 group-hover:scale-105"></div>
                 <div class="relative p-6 pt-16 md:p-8 md:pl-12 md:rounded-r-2xl lg:pl-20 lg:p-16">
@@ -283,9 +287,8 @@ const collapses = ref(
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-
+        </div>
+        </div>
 
     <!-- Seccion Noticias y titulares -->
     <section class="bg-white dark:bg-gray-900">

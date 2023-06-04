@@ -33,6 +33,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'website',
+        'presentation',
+        'status',
+        'is_paid',
+        'nick_name',
+        'phone',
+        'address',
+        'description',
+        'group',
+        'profile_photo_path',
+
     ];
 
     /**

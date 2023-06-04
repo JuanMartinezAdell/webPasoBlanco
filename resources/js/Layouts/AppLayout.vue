@@ -53,10 +53,13 @@ const logout = () => {
                                     Inicio
                                 </NavLink>
                                 <NavLink :href="route('products.indexproduct')" :active="route().current('products.*')">
+                                    Blog
+                                </NavLink>
+                                <NavLink :href="route('products.indexproduct')" :active="route().current('products.*')">
                                     Tienda
                                 </NavLink>
                                 <NavLink :href="route('articles.indexarticle')" :active="route().current('articles.*')">
-                                    Titulares
+                                    Galeria
                                 </NavLink>
                             </div>
                         </div>
@@ -117,11 +120,18 @@ const logout = () => {
 
                                                     <div class="border-t border-gray-200 dark:border-gray-600" />
 
-                                                    <DropdownLink :href="route('billings.indexbilling')">
-                                                            Métodos de pago
+                                                    <DropdownLink :href="route('plans.indexplan')">
+                                                            Pago de Cuotas
                                                     </DropdownLink>
 
                                                     <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                                                    <DropdownLink :href="route('admin.admindashboard')">
+                                                            Panel Administrador
+                                                    </DropdownLink>
+
+                                                    <div class="border-t border-gray-200 dark:border-gray-600" />
+
 
                                                     <!-- Authentication -->
                                                     <form @submit.prevent="logout">
@@ -219,8 +229,12 @@ const logout = () => {
                                     <ResponsiveNavLink :href="route('profile.show')" :active="route().current('profile.show')">
                                         Profile
                                     </ResponsiveNavLink>
-                                    <ResponsiveNavLink :href="route('billings.indexbilling')" :active="route().current('billings.indexbilling')">
-                                        Metodos de Pago
+                                    <ResponsiveNavLink :href="route('plans.indexplan')" :active="route().current('plans.indexplan')">
+                                        Pago de Cuotas
+                                    </ResponsiveNavLink>
+
+                                    <ResponsiveNavLink :href="admind" :active="route().current('admind')">
+                                        Panel Administrador
                                     </ResponsiveNavLink>
 
                                     <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')" :active="route().current('api-tokens.index')">

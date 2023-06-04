@@ -38,8 +38,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+    Route::get('/welcome', function () {
+        return Inertia::render('Welcome');
     })->name('dashboard');
 
     /*Route::get('/categories', [CategoryController::class, 'create'])
@@ -72,7 +72,9 @@ Route::group(['middleware' => [
     Route::post('/article/upload/{article}', [ArticleController::class, 'upload'])->name('articles.upload');
 });
 
-
+Route::get('/admin', function () {
+    return Inertia::render('AdminDashboard');
+})->name('admin.admindashboard');
 
 Route::get('/products', [StripeController::class, 'createCheckoutSession'])->name('products.indexproduct');
 

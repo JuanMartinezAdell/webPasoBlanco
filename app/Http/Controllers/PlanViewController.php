@@ -43,10 +43,26 @@ class PlanViewController extends Controller
 
         $plan = Plan::where('slug', $slug)->first();
 
+        if ($plan === null) {
+            return response(
+                [
+                    'error' => ['plan' => 'El plan no existe']
+                ],
+                422
+            );
+        }
+
         auth()->user()->newSubscription('Suscripciones Paso Blanco', $plan->stripe_id)
             ->create(request(key: "paymentMethod"));
 
 
         return Redirect::route('plans.indexplan');
+    }
+
+    public function swapSubcription($slug)
+    {
+        $plan = Plan::where('slug', $slug)->first();
+
+        auth()->user()->subcription('default')->swap($plan->stripe_id);
     }
 }
