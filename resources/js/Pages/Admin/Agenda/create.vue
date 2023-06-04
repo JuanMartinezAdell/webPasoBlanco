@@ -10,10 +10,6 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import FormSection from "@/Components/FormSection.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
 
-const props = defineProps({
-    posts: Object,
-});
-
 const form = useForm({
     name: "",
     email: "",
@@ -25,7 +21,7 @@ const form = useForm({
 });
 
 const createAgenda = () => {
-    form.diary(route("agenda.store"));
+    form.post(route("diary.store"));
 };
 </script>
 

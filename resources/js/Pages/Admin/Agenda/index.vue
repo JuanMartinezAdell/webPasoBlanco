@@ -5,6 +5,23 @@ import { Head, Link, useForm, router } from "@inertiajs/vue3";
 import Pagination from "@/NewComponents/PaginationVue.vue";
 import Input from "@/NewComponents/Input.vue";
 
+const getImageSrc = (group) => {
+    switch (group) {
+        case "hombres":
+            return "/image/emoji/nazareno.png";
+        case "mujeres":
+            return "/image/emoji/mantilla.png";
+        case "admin":
+            return "/image/emoji/jesus.png";
+        case "superusers":
+            return "/image/emoji/espiritu.png";
+        case "externos":
+            return "/image/emoji/militar.png";
+        default:
+            return "/image/emoji/SanJuan.jpg"; // default image if group is not recognized
+    }
+};
+
 let { filters, users, totalUsuarios } = defineProps({
     filters: Object,
     users: Object,
@@ -91,7 +108,9 @@ const sortUsers = () => {
                             </Link>
                         </button>
 
-                        <button
+                        <Link
+                            href="/admin/diary/create"
+                            type="button"
                             class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600"
                         >
                             <svg
@@ -110,7 +129,7 @@ const sortUsers = () => {
                             </svg>
 
                             <span>Add Usuario</span>
-                        </button>
+                        </Link>
                     </div>
                 </div>
 
@@ -160,11 +179,18 @@ const sortUsers = () => {
                                                 scope="col"
                                                 class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-white dark:text-gray-400"
                                             >
+                                                Usuarios
+                                            </th>
+
+                                            <th
+                                                scope="col"
+                                                class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-white dark:text-gray-400"
+                                            >
                                                 <button
                                                     @click="sortUsers"
                                                     class="flex items-center gap-x-3 focus:outline-none"
                                                 >
-                                                    <span>Usuarios</span>
+                                                    <span>Cuota</span>
 
                                                     <svg
                                                         class="h-3"
@@ -192,13 +218,6 @@ const sortUsers = () => {
                                                         />
                                                     </svg>
                                                 </button>
-                                            </th>
-
-                                            <th
-                                                scope="col"
-                                                class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-white dark:text-gray-400"
-                                            >
-                                                Cuota
                                             </th>
 
                                             <th
@@ -245,8 +264,13 @@ const sortUsers = () => {
                                             >
                                                 <div class="relative h-10 w-10">
                                                     <img
+                                                        v-if="user.group"
                                                         class="h-full w-full rounded-full object-cover object-center"
-                                                        src="../../../../image/emoji/nazareno.png"
+                                                        :src="
+                                                            getImageSrc(
+                                                                user.group
+                                                            )
+                                                        "
                                                         alt=""
                                                     />
                                                     <span
@@ -364,7 +388,7 @@ const sortUsers = () => {
                                                 <div class="relative h-10 w-10">
                                                     <img
                                                         class="h-full w-full rounded-full object-cover object-center"
-                                                        src="../../../../image/emoji/mantilla.png"
+                                                        src="/image/emoji/mantilla.png"
                                                         alt=""
                                                     />
                                                     <span
@@ -465,7 +489,7 @@ const sortUsers = () => {
                                                 <div class="relative h-10 w-10">
                                                     <img
                                                         class="h-full w-full rounded-full object-cover object-center"
-                                                        src="../../../../image/emoji/jesus.png"
+                                                        src="/image/emoji/jesus.png"
                                                         alt=""
                                                     />
                                                     <span

@@ -26,7 +26,6 @@ Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboa
 });*/
 
 Route::get('/diary', [AgendaController::class, 'index'])->name('diary.index');
-
 Route::get('/diary/create', [AgendaController::class, 'create'])->name('diary.create');
 Route::post('/diary', [AgendaController::class, 'store'])->name('diary.store');
 Route::get('/diary/{user}/edit', [ContactController::class, 'edit'])->name('diary.edit');
@@ -50,13 +49,13 @@ Route::put('/article/{article}/edit', [ArticleController::class, 'update'])->nam
 Route::get('/article/{article}/delete', [ArticleController::class, 'destroy'])->name('articles.destroy');
 Route::post('/article/upload/{article}', [ArticleController::class, 'upload'])->name('articles.upload');*/
 
-/*Route::prefix('category')->middleware('auth')->group(function () {
+Route::prefix('category')->middleware('auth')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::get('', 'index')->name('category.indexcategory');
         Route::get('create', 'create')->name('category.createcategory');
         Route::get('', 'store')->name('category.store');
     });
-});*/
+});
 
 Route::get('/category', [CategoryController::class, 'index'])->name('category.indexcategory');
 Route::get('/category/create', [CategoryController::class, 'create'])->name('category.createcategory');

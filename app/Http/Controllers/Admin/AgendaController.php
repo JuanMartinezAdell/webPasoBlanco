@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Agenda;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\Diary\Store;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 
 class AgendaController extends Controller
 {
@@ -76,59 +80,21 @@ class AgendaController extends Controller
         return inertia("Admin/Agenda/create");
     }
 
-    /*'name',
-        'email',
-
-
-        'status',
-        'is_paid',
-        'nick_name',
-        'phone',
-        'address',
-        'description',
-        'group',
-        profile_photo_path*/
-
-    public function store(Request $request)
+    public function store(Store $request): RedirectResponse
     {
         //
-        $request->validate([
-            'name' => ['required', 'max:50'],
-            'organization_id' => ['required', 'max:50'],
-            'position_id' => ['required', 'max:50'],
-            'service_id' => ['required', 'max:50'],
-            'location_id' => ['required', 'max:50'],
-            'phone' => ['required', 'unique:contacts', 'max:50'],
-            'short_phone' => ['required', 'unique:contacts', 'max:50'],
-            'phone_code' => ['required', 'max:50'],
-            'email' => ['required', 'unique:contacts', 'max:50', 'email'],
-            'description' => ['required'],
-        ]);
+        $validatedData = $request->validated();
+        $validatedData['password'] = Hash::make(Str::random(8));
 
-        $contact = new Contact;
-        $contact->name = $request->name;
-        $contact->organization_id = $request->organization_id;
-        $contact->position_id = $request->position_id;
-        $contact->service_id = $request->service_id;
-        $contact->location_id = $request->location_id;
-        $contact->phone = $request->phone;
-        $contact->short_phone = $request->short_phone;
-        $contact->phone_code = $request->phone;
-        $contact->email = $request->email;
-        $contact->description = $request->description;
-        $contact->save();
-        sleep(1);
+        User::create($validatedData);
 
-        return redirect()->route('contacts.index');
+        //dd($request->all());
+
+        return redirect()->route('diary.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Contact $contact)
+
+    /*public function edit(Contact $contact)
     {
         //
         $organizations = \App\Models\Organization::all();
@@ -139,20 +105,7 @@ class AgendaController extends Controller
         return inertia('Contacts/EditContacts', compact('contact', 'organizations', 'positions', 'services', 'locations'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     **/
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateContactRequest  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Contact $contact)
     {
         //
@@ -192,10 +145,10 @@ class AgendaController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    /* public function destroy(Contact $contact)
     {
         //
         $contact->delete();
         return redirect()->route('contacts.index');
-    }
+    }*/
 }

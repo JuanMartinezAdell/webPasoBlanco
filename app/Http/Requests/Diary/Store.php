@@ -11,7 +11,7 @@ class Store extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,12 @@ class Store extends FormRequest
     {
         return [
             //
+            'name' => ['required', 'min:5', 'max:255'],
+            'address' => ['required', 'min:5', 'max:50'],
+            'group' => ['required'],
+            'phone' => ['required', 'max:50'],
+            'email' => ['required', 'min:5', 'max:50', 'unique:users'],
+            'description' => ['required', 'max:255'],
         ];
     }
 }

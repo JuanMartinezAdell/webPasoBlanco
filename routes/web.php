@@ -14,6 +14,8 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\PlanViewController;
 
+require __DIR__ . '/admin.php';
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
