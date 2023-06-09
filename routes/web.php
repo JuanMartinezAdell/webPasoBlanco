@@ -12,7 +12,7 @@ use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\PlanViewController;
 use App\Http\Controllers\StripeController;
 
 
@@ -49,7 +49,12 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/welcome', function () {
-        return Inertia::render('Welcome');
+        $plans = Plan::where('is_free', false)
+            ->orderBy('price', 'asc')
+            ->get();
+        return Inertia::render('Welcome', [
+            'plans' => $plans,
+        ]);
     })->name('dashboard');
 
     /*Route::get('/categories', [CategoryController::class, 'create'])
