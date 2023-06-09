@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use App\Models\Article;
 use App\Models\Product;
+use App\Models\Plan;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -10,9 +11,11 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\StripeController;
-use App\Http\Controllers\PlanViewController;
+
+
 
 require __DIR__ . '/admin.php';
 
@@ -28,10 +31,15 @@ require __DIR__ . '/admin.php';
 */
 
 Route::get('/', function () {
+    $plans = Plan::where('is_free', false)
+        ->orderBy('price', 'asc')
+        ->get();
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'products' => Product::take(3)->get(),
+        'plans' => $plans,
     ]);
 });
 
@@ -57,6 +65,10 @@ Route::group(['middleware' => [
 ]], function () {
 
     //Route::resource('/category', App\Http\Controllers\CategoryController::class);
+    Route::get('/gallery',  [GalleryController::class, 'index'])->name('gallery.indexgallery');
+    Route::get('/gallery/semanasanta', [GalleryController::class, 'showsanta'])->name('gallery.showsanta');
+    Route::get('/gallery/semanasanta/banderas', [GalleryController::class, 'showbanderas'])->name('gallery.showbanderas');
+    Route::get('/gallery/semanasanta/romanos', [GalleryController::class, 'showromanos'])->name('gallery.showromanos');
 
     Route::get('/category', [CategoryController::class, 'index'])->name('categories.indexcategory');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('categories.createcategory');
@@ -73,10 +85,6 @@ Route::group(['middleware' => [
     Route::get('/article/{article}/delete', [ArticleController::class, 'destroy'])->name('articles.destroy');
     Route::post('/article/upload/{article}', [ArticleController::class, 'upload'])->name('articles.upload');
 });
-
-Route::get('/admin', function () {
-    return Inertia::render('AdminDashboard');
-})->name('admin.admindashboard');
 
 Route::get('/products', [StripeController::class, 'createCheckoutSession'])->name('products.indexproduct');
 

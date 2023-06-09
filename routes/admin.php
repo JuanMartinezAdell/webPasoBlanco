@@ -2,16 +2,26 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AgendaController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
+/*Route::middleware(['is_admin'])->group(function () {
+    // Tus rutas aquí
+    Route::get('/admin', function () {
+        return Inertia::render('AdminDashboard');
+    })->name('admin.admindashboard');
+});*/
+
+Route::get('/admin', function () {
+    return Inertia::render('AdminDashboard');
+})->middleware('is_admin')->name('admin.admindashboard');
 
 /*Route::get('/', function () {
     return Inertia::render('AdminDashboard');
-})->name('admin.admindashboard');*/
+})->name('admin.admindashboard')->middleware('is_admin');*/
 
-Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 
 /*Route::prefix('diary')->middleware('auth')->group(function () {
@@ -31,7 +41,6 @@ Route::post('/diary', [AgendaController::class, 'store'])->name('diary.store');
 Route::get('/diary/{user}/edit', [AgendaController::class, 'edit'])->name('diary.edit');
 Route::put('/diary/{user}/edit', [AgendaController::class, 'update'])->name('diary.update');
 Route::get('/diary/{user}/delete', [AgendaController::class, 'destroy'])->name('diary.destroy');
-
 
 
 /*Route::prefix('post')->middleware('auth')->group(function () {

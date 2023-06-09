@@ -96,6 +96,11 @@ class AgendaController extends Controller
 
     public function edit(User $user)
     {
-        return inertia("Admin/Agenda/Edit", compact('user'));
+        return inertia("Admin/Agenda/edit", compact("user"));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        dd($request->all());
     }
 }
