@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 
 Route::get('/admin', function () {
     return Inertia::render('AdminDashboard');
+    return Inertia::render('AdminDashboard', ['monthlySubscription']);
 })->middleware('is_admin')->name('admin.admindashboard');
 
 /*Route::get('/', function () {

@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { onMounted } from "vue";
+import PrimaryButtonProces from "@/NewComponents/PrimaryButtonProces.vue";
+import { onMounted, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 
 const stripeKey = import.meta.env.VITE_STRIPE_KEY;
@@ -13,6 +13,8 @@ const props = defineProps({
         required: true,
     },
 });
+
+const formProcessing = ref(false);
 
 onMounted(() => {
     const stripe = Stripe(`${stripeKey}`);
@@ -26,6 +28,7 @@ onMounted(() => {
     cardButton.addEventListener("click", async (e) => {
         const clientSecret = cardButton.dataset.secret;
         const slug = e.target.dataset.slug;
+        formProcessing.value = true;
 
         console.log(clientSecret);
 
@@ -45,6 +48,7 @@ onMounted(() => {
             let span = document.getElementById("card-error-message");
 
             span.textContent = error.message;
+            formProcessing.value = false;
         } else {
             // enviar peticion al servidor para suscribir al usuario
             // Limpiar formulario
@@ -62,6 +66,8 @@ onMounted(() => {
                 console.log(response.data);
             } catch (error) {
                 console.log(error);
+            } finally {
+                formProcessing.value = false;
             }
         }
     });
@@ -120,13 +126,14 @@ onMounted(() => {
                             class="px-8 py-6 bg-gray-50 border-t border-gray-200"
                         >
                             <div class="flex justify-end">
-                                <PrimaryButton
+                                <PrimaryButtonProces
                                     id="card-button"
                                     :data-secret="intent"
                                     :data-slug="plan.slug"
+                                    :processing="formProcessing"
                                 >
                                     Pagar Cuota
-                                </PrimaryButton>
+                                </PrimaryButtonProces>
                             </div>
                         </footer>
                     </section>

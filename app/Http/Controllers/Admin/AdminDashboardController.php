@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\User;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class AdminDashboardController extends Controller
 {
@@ -43,5 +46,15 @@ class AdminDashboardController extends Controller
             'activeSubscriptions' => $activeSubscriptions,
             'inactiveSubcriptions' => $inactiveSubcriptions,
         ]);
+    }
+
+    public function show()
+    {
+        $monthlySubscriptions = Subscription::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->whereYear('created_at', Carbon::now()->year)
+            ->groupBy('month')
+            ->pluck('count', 'month');
+
+        return Inertia::render('AdminDashboard', ['monthlySubscriptions' => $monthlySubscriptions]);
     }
 }

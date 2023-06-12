@@ -111,5 +111,7 @@ Route::prefix('plans')->middleware('auth')->group(function () {
         Route::post('checkout/{slug}', 'checkout')->name('checkout.plan');
         Route::get('checkout/{slug}', 'checkout')->name('checkout.plan');
         Route::post('{slug}', 'createSubcription')->name('subcription.payment');
+        Route::get('subscription', 'showActiveSubscription')->name('subscription.show');
+        Route::delete('subscription/{slug}', 'cancelSubscription')->name('subscription.cancel');
     });
 });

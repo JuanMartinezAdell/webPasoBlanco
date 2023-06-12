@@ -61,7 +61,7 @@ class AgendaController extends Controller
     }
 
 
-    public function updateUsersIsPaid()
+    /* public function updateUsersIsPaid()
     {
         // Encuentra los usuarios con una suscripción activa
         $usersWithActiveSubscription = User::whereHas('subscriptions', function ($query) {
@@ -72,8 +72,18 @@ class AgendaController extends Controller
         foreach ($usersWithActiveSubscription as $user) {
             $user->update(['is_paid' => true]);
         }
-    }
+    }*/
 
+    public function updateUsersIsPaid()
+    {
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $hasActiveSubscription = $user->subscriptions()->where('stripe_status', 'active')->exists();
+
+            $user->update(['is_paid' => $hasActiveSubscription]);
+        }
+    }
 
 
     public function create()
