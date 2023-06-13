@@ -33,6 +33,22 @@ class PlanViewController extends Controller
 
     public function checkout($slug)
     {
+
+        $user = auth()->user();
+
+        $activeSubscription = $user->subscriptions()
+            ->where('stripe_status', 'active')
+            ->whereNull('ends_at')
+            ->first();
+
+        if ($activeSubscription) {
+            return Inertia::render('Plans/subscriptionPlan', [
+                'plan' => $activeSubscription->plan,
+                'subscription' => $activeSubscription,
+            ]);
+        }
+
+
         $plan = Plan::where('slug', $slug)->first();
         //dd($plan);
 
