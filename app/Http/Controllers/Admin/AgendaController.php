@@ -128,7 +128,7 @@ class AgendaController extends Controller
         $user->group =  $request->group;
         $user->phone = $request->phone;
         $user->email = $request->email;
-        $user->description =  $request->email;
+        $user->description =  $request->description;
         $user->save();
         sleep(1);
 
