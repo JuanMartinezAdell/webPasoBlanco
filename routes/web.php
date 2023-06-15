@@ -53,6 +53,7 @@ Route::middleware([
             ->orderBy('price', 'asc')
             ->get();
         return Inertia::render('Welcome', [
+            'products' => Product::take(3)->get(),
             'plans' => $plans,
         ]);
     })->name('dashboard');

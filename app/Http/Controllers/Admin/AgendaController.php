@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\Diary\Put;
 use App\Http\Requests\Diary\Store;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -111,6 +112,36 @@ class AgendaController extends Controller
 
     public function update(Request $request, User $user)
     {
-        dd($request->all());
+        //dd($request->all());
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'address' => ['min:5', 'max:50'],
+            'group' => ['required'],
+            'phone' => ['max:15'],
+            'email' => ['required', 'max:50', 'email'],
+            'description' => ['max:255'],
+        ]);
+
+        $user = User::find($request->id);
+        $user->name =  $request->name;
+        $user->address = $request->address;
+        $user->group =  $request->group;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->description =  $request->email;
+        $user->save();
+        sleep(1);
+
+
+        //$user->update($request->validated());
+
+        return redirect()->route('diary.index');
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('diary.index');
     }
 }

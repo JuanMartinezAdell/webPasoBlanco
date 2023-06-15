@@ -127,6 +127,8 @@ class PlanViewController extends Controller
 
         $subscription = $user->subscriptions()->where('stripe_status', 'active')->whereNull('ends_at')->first();
 
+        $subscriptions = $user->subscriptions()->where('stripe_status', 'active')->whereNotNull('ends_at')->first();
+
         if ($subscription !== null) {
             $plan = DB::table('plans')
                 ->where('stripe_id', $subscription->stripe_price)
@@ -148,7 +150,7 @@ class PlanViewController extends Controller
 
         return Inertia::render('Plans/subscriptionPlan', [
             'plan' => $plan,
-            'subscription' => $subscription,
+            'subscription' => $subscriptions,
         ]);
     }
 }

@@ -119,8 +119,10 @@ const cancel = (slug) => {
                                                 v-if="plan.name === 'GRATUITO'"
                                                 class="text-red-800 font-bold"
                                             >
-                                                Este es un plan gratuito y puede
-                                                tiene limitaciones.
+                                                Actualmente has cancelado tu
+                                                subscription. Por lo que no se
+                                                renovara tu cuota
+                                                automáticamente.
                                             </span>
                                             <span v-else>
                                                 Tu plan se
@@ -137,27 +139,9 @@ const cancel = (slug) => {
                                                 v-if="plan.name === 'GRATUITO'"
                                                 class="text-red-800 font-bold"
                                             >
-                                                Actualmente no tienes una cuota
-                                                activa.
-                                            </span>
-                                            <span v-else
-                                                >Actualmente perteneces a la
-                                                Real Hermandad del Paso Blanco
-                                                de Huercal-Overa con tu cuota al
-                                                día</span
-                                            >
-                                        </li>
-                                        <li class="space-x-2">
-                                            <span
-                                                class="text-red-500 font-semibold"
-                                                >&check;</span
-                                            >
-                                            <span
-                                                v-if="plan.name === 'GRATUITO'"
-                                                class="text-red-800 font-bold"
-                                            >
                                                 Si quieres ser Miembro de la
-                                                Hermandad haz efectiva tu cuota
+                                                Hermandad de nuevo haz efectiva
+                                                tu cuota cuando finalice
                                             </span>
                                             <span v-else
                                                 >Puedes cambiar el tipo de Plan
@@ -183,7 +167,39 @@ const cancel = (slug) => {
                                                 Si cancelas tu Subscripción
                                                 tendrás la cuota activa todo el
                                                 periodo {{ plan.name }} desde
-                                                que iniciaste el pago
+                                                que iniciaste el pago.
+                                            </span>
+                                        </li>
+                                        <li class="space-x-2">
+                                            <span
+                                                class="text-red-500 font-semibold"
+                                                >&check;</span
+                                            >
+                                            <span
+                                                v-if="
+                                                    plan.name === 'GRATUITO' &&
+                                                    subscription &&
+                                                    subscription.ends_at !==
+                                                        null
+                                                "
+                                                class="text-red-800 text-2xl font-bold"
+                                            >
+                                                Tu última subscripcion vence el:
+                                                {{
+                                                    new Date(
+                                                        subscription.ends_at
+                                                    ).toLocaleDateString()
+                                                }}
+                                                hasta esta fecha tienes tu cuota
+                                                activa y eres mienbro de la
+                                                Hermandad.
+                                            </span>
+                                            <span v-else>
+                                                Este es un plan gratuito ya que
+                                                no tienes una cuota activa y
+                                                tienes limitaciones, puedes
+                                                activar o ingresar tu cuota
+                                                cuadno lo desees.
                                             </span>
                                         </li>
                                     </ul>

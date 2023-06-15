@@ -4,7 +4,7 @@ namespace App\Http\Requests\Diary;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Store extends FormRequest
+class Put extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,11 @@ class Store extends FormRequest
         return [
             //
             'name' => "required | min:5 | max:255",
-            'address' => "required | min:5| max:50",
+            'address' => "min:5| max:50",
             'group' => "required",
-            'phone' => "required | max:50",
-            'email' => "required | min:5 | max:50 | unique:" . $this->route("users")->id,
-            'description' => "required, max:255",
+            'phone' => " max:15",
+            'email' => "required | min:5 | max:50 | unique:users,email," . $this->route("user")->id,
+            'description' => " max:255",
         ];
     }
 }
