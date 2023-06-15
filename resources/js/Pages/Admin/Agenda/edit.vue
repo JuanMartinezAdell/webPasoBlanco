@@ -6,21 +6,21 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import AppLayout from "@/Layouts/AppLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import FormSection from "@/Components/FormSection.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
 
 const props = defineProps({
-    users: Object,
+    user: Object,
 });
 
 const form = useForm({
-    id: props.users.id,
-    name: props.users.name,
-    address: props.users.address,
-    group: props.users.group,
-    email: props.users.email,
-    description: props.users.description,
+    id: props.user.id,
+    name: props.user.name,
+    address: props.user.address,
+    group: props.user.group,
+    email: props.user.email,
+    description: props.user.description,
 });
 
 const updateUsers = () => {

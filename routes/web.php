@@ -105,6 +105,8 @@ Route::prefix('billings')->middleware('auth')->group(function () {
 
 //Subcripciones
 
+Route::get('/subscription-plan', [PlanViewController::class, 'showSubscriptionPlan'])->name('subscription.plan');
+
 Route::prefix('plans')->middleware('auth')->group(function () {
     Route::controller(PlanViewController::class)->group(function () {
         Route::get('', 'index')->name('plans.indexplan');

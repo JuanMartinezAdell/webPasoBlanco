@@ -20,6 +20,33 @@ class PlanViewController extends Controller
 {
     //
 
+    public function showSubscriptionPlan()
+    {
+        $user = auth()->user();
+
+        $activeSubscription = $user->subscriptions()
+            ->where('stripe_status', 'active')
+            ->whereNull('ends_at')
+            ->first();
+
+        if (!$activeSubscription) {
+            return redirect()->route('plans.indexplan');
+        }
+
+        $plan = DB::table('plans')
+            ->where('stripe_id', $activeSubscription->stripe_price)
+            ->first();
+
+        if (!$plan) {
+            return redirect()->route('plans.indexplan');
+        }
+
+        return Inertia::render('Plans/subscriptionPlan', [
+            'plan' => $plan,
+            'subscription' => $activeSubscription,
+        ]);
+    }
+
     public function index()
     {
         $plans = Plan::where('is_free', false)
@@ -33,22 +60,6 @@ class PlanViewController extends Controller
 
     public function checkout($slug)
     {
-
-        $user = auth()->user();
-
-        $activeSubscription = $user->subscriptions()
-            ->where('stripe_status', 'active')
-            ->whereNull('ends_at')
-            ->first();
-
-        if ($activeSubscription) {
-            return Inertia::render('Plans/subscriptionPlan', [
-                'plan' => $activeSubscription->plan,
-                'subscription' => $activeSubscription,
-            ]);
-        }
-
-
         $plan = Plan::where('slug', $slug)->first();
         //dd($plan);
 
@@ -80,7 +91,7 @@ class PlanViewController extends Controller
             ->create(request(key: "paymentMethod"));
 
 
-        return Redirect::route('plans.indexplan');
+        return Redirect::route('subscription.plan');
     }
 
     public function cancelSubscription($slug)

@@ -230,7 +230,21 @@ const logout = () => {
                                                     <DropdownLink
                                                         :href="
                                                             route(
-                                                                'plans.indexplan'
+                                                                'subscription.show'
+                                                            )
+                                                        "
+                                                    >
+                                                        Estado Cuota
+                                                    </DropdownLink>
+
+                                                    <div
+                                                        class="border-t border-gray-200 dark:border-gray-600"
+                                                    />
+
+                                                    <DropdownLink
+                                                        :href="
+                                                            route(
+                                                                'subscription.plan'
                                                             )
                                                         "
                                                     >
