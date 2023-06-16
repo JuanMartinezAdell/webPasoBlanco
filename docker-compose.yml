@@ -5,8 +5,10 @@ services:
             context: .
             dockerfile: Dockerfile
             args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.2/app
+                WWWGROUP: '0'  # Define a user group here
+                user: '${WWWUSER}'
+                uid: 1000
+        image: myapp:latest  # Use a specific tag for your built image
         container_name: blancos-app
         restart: unless-stopped
         environment:
