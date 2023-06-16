@@ -2,8 +2,8 @@
 FROM php:8.1-fpm
 
 # Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+ARG user=root
+ARG uid=0
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -27,7 +27,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install Node.js and npm
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
 
-
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
@@ -37,3 +36,19 @@ RUN mkdir -p /home/$user/.composer && \
 WORKDIR /var/www
 
 USER $user
+
+# Copy composer.json
+COPY --chown=$user:$user composer.json /var/www/
+
+# Install Composer dependencies
+RUN composer install --no-scripts --no-autoloader --no-interaction --no-dev
+
+# Copy everything else
+COPY --chown=$user:$user . /var/www/
+
+# Finish composer
+RUN composer dump-autoload --optimize && composer run-script --no-dev post-autoload-dump
+
+# Install NPM dependencies and build assets
+RUN npm install && npm run production
+
