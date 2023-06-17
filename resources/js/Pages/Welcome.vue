@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 import AuthenticationCardNew from "@/NewComponents/AuthenticationCardVue.vue";
@@ -28,7 +28,19 @@ defineProps({
     canRegister: Boolean,
     products: Object,
     plans: Array,
+    subscription: Object,
 });
+
+const subscriptionPlan = () => {
+    console.log($page.props.auth.user);
+    if ($page.props.auth.user) {
+        console.log("Navigating to subscription.plan");
+        router.visit(route("subscription.plan"));
+    } else {
+        console.log("Navigating to login");
+        router.visit(route("login"));
+    }
+};
 
 const modules = [EffectFade, Navigation, Pagination];
 
@@ -169,16 +181,24 @@ const collapses = ref([
             <p class="mt-6 text-gray-500 dark:text-gray-300">
                 Real Hermandad de Nuestra Señora de las Angustias y San Juan
             </p>
-            <button
+            <PrimaryButton
+                @click="subscriptionPlan"
                 class="mt-6 rounded-lg bg-blue-600 px-6 py-2.5 text-center text-sm font-medium capitalize leading-5 text-white focus:outline-none lg:mx-0 lg:w-auto transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-blue-800 duration-200"
             >
                 Hazte hermano
-            </button>
+            </PrimaryButton>
             <p class="mt-3 text-sm text-gray-400">No credit card required</p>
         </div>
 
         <!-- Seccion paga tu cuota -->
-        <div class="bg-white dark:bg-gray-900">
+        <div
+            class="bg-white dark:bg-gray-900"
+            v-show="
+                !$page.props.auth.user ||
+                ($page.props.auth.user &&
+                    $page.props.auth.user.subscription !== 'active')
+            "
+        >
             <div class="container mx-auto px-6 py-8">
                 <h1
                     class="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl"
@@ -1064,7 +1084,7 @@ const collapses = ref([
                                     alt=""
                                 />
 
-                                <div class="mt-4 text-center">
+                                <div class="mt-4 text-center pb-12">
                                     <h1
                                         class="font-semibold text-gray-800 dark:text-white pb-2"
                                     >
@@ -1099,7 +1119,7 @@ const collapses = ref([
                                     alt=""
                                 />
 
-                                <div class="mt-4 text-center">
+                                <div class="mt-4 text-center pb-12">
                                     <h1
                                         class="font-semibold text-gray-800 dark:text-white"
                                     >
@@ -1160,7 +1180,7 @@ const collapses = ref([
                                     alt=""
                                 />
 
-                                <div class="mt-4 text-center">
+                                <div class="mt-4 text-center pb-12">
                                     <h1
                                         class="font-semibold text-gray-800 dark:text-white"
                                     >
@@ -1207,14 +1227,14 @@ const collapses = ref([
                     >
                         <div class="rounded-lg shadow-lg bg-white max-w-sm">
                             <div
-                                class="bg-white pounded shadow-xl"
+                                class="bg-white pounded rounded-xl shadow-xl"
                                 :image="product.image"
                                 :name="product.name"
                                 :description="product.description"
                                 :price="product.price"
                             >
                                 <div
-                                    class="h-56 bg-cover bg-center p-4"
+                                    class="h-56 bg-cover bg-center p-4 rounded-lg shadow-lg"
                                     :style="{
                                         backgroundImage:
                                             'url(' + product.image + ')',
@@ -1225,7 +1245,7 @@ const collapses = ref([
                                         >{{ product.price }}€</span
                                     >
                                 </div>
-                                <div class="px-6 py-4">
+                                <div class="px-6 py-4 text-center">
                                     <h1
                                         class="mt-4 text-2xl font-semibold capitalize text-gray-900 dark:text-white"
                                     >
@@ -1520,7 +1540,7 @@ const collapses = ref([
                                     >
                                     <input
                                         type="text"
-                                        placeholder="John Doe"
+                                        placeholder="Juan Bautista"
                                         class="mt-2 block w-full rounded-md border border-gray-200 bg-white px-5 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
                                     />
                                 </div>
@@ -1532,7 +1552,7 @@ const collapses = ref([
                                     >
                                     <input
                                         type="email"
-                                        placeholder="johndoe@example.com"
+                                        placeholder="juan@example.com"
                                         class="mt-2 block w-full rounded-md border border-gray-200 bg-white px-5 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
                                     />
                                 </div>

@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PlanViewController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\StripeController;
 
 
@@ -75,6 +76,10 @@ Route::group(['middleware' => [
     Route::get('/gallery/semanasanta', [GalleryController::class, 'showsanta'])->name('gallery.showsanta');
     Route::get('/gallery/semanasanta/banderas', [GalleryController::class, 'showbanderas'])->name('gallery.showbanderas');
     Route::get('/gallery/semanasanta/romanos', [GalleryController::class, 'showromanos'])->name('gallery.showromanos');
+
+    Route::get('/shop',  [ProductController::class, 'index'])->name('product.indexshop');
+
+    Route::get('/posts',  [PostController::class, 'index'])->name('posts.indexpost');
 
     Route::get('/category', [CategoryController::class, 'index'])->name('categories.indexcategory');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('categories.createcategory');

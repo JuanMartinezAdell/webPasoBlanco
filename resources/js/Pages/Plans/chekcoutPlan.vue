@@ -6,6 +6,8 @@ import { router } from "@inertiajs/vue3";
 
 const stripeKey = import.meta.env.VITE_STRIPE_KEY;
 
+const checked = ref(false);
+
 const props = defineProps({
     intent: String,
     plan: {
@@ -74,6 +76,17 @@ onMounted(() => {
 });
 </script>
 
+<script>
+import { ref } from "vue";
+
+export default {
+    setup() {
+        const checked = ref(false);
+        return { checked };
+    },
+};
+</script>
+
 <template>
     <AppLayout title="Chekcout">
         <div class="container py-20">
@@ -135,7 +148,166 @@ onMounted(() => {
                                     Pagar Cuota
                                 </PrimaryButtonProces>
                             </div>
+                            <!--div class="flex justify-end" v-else>
+                                <PrimaryButtonProces>
+                                    Por favor, lee los terminos y condiciones
+                                </PrimaryButtonProces>
+                            </!--div -->
                         </footer>
+                    </section>
+                    <section class="md:col-span-1 flex justify-between pt-10">
+                        <div class="px-4 sm:px-0">
+                            <p
+                                class="text-sm font-semibold font-medium text-gray-900 dark:text-gray-100"
+                            >
+                                Acuerdo de Suscripción y Términos del Servicio
+                                Paso Blanco de Huercal-Overa
+                            </p>
+
+                            <p
+                                class="mt-1 text-xs text-gray-600 dark:text-gray-400"
+                            >
+                                Al registrarte como suscriptor en nuestra página
+                                web, estás aceptando los siguientes términos y
+                                condiciones. Por favor, léelos cuidadosamente.
+                            </p>
+                            <input
+                                type="checkbox"
+                                id="checkbox"
+                                v-model="checked"
+                                :disabled="checked"
+                            />
+                        </div>
+                    </section>
+                    <section
+                        class="md:col-span-2 flex justify-between"
+                        v-if="checked"
+                    >
+                        <div class="mt-5 px-8 py-6">
+                            <div class="px-4 sm:px-0">
+                                <ol class="list-decimal">
+                                    <li
+                                        class="mt-1 text-sm text-gray-800 dark:text-gray-400"
+                                    >
+                                        Aceptación de los términos
+                                    </li>
+                                    <ul
+                                        class="mt-1 text-xs text-gray-600 dark:text-gray-200"
+                                    >
+                                        Al usar nuestro sitio web y suscribirte
+                                        a nuestra hermandad, aceptas estos
+                                        Términos de Servicio. Si no estás de
+                                        acuerdo con estos términos, por favor no
+                                        utilices nuestro sitio web o te
+                                        suscribas a nuestros servicios.
+                                    </ul>
+                                    <li
+                                        class="mt-1 text-sm text-gray-800 dark:text-gray-400"
+                                    >
+                                        Cuotas de suscripción
+                                    </li>
+                                    <ul
+                                        class="mt-1 text-xs text-gray-600 dark:text-gray-200"
+                                    >
+                                        Para suscribirte a nuestra hermandad,
+                                        debes pagar una cuota de suscripción.
+                                        Los fondos recaudados a través de estas
+                                        cuotas se destinan a la cofradía, la
+                                        conservación de las imágenes, los gastos
+                                        de las procesiones y el mantenimiento
+                                        del patrimonio.
+                                    </ul>
+                                    <li
+                                        class="mt-1 text-sm text-gray-800 dark:text-gray-400"
+                                    >
+                                        Periodo de suscripción
+                                    </li>
+                                    <ul
+                                        class="mt-1 text-xs text-gray-600 dark:text-gray-200"
+                                    >
+                                        Una vez que te suscribes, tu suscripción
+                                        estará vigente desde el momento de la
+                                        compra hasta el final del periodo de
+                                        renovación que hayas elegido.
+                                    </ul>
+                                    <li
+                                        class="mt-1 text-sm text-gray-800 dark:text-gray-400"
+                                    >
+                                        Cancelación de la suscripción
+                                    </li>
+                                    <ul
+                                        class="mt-1 text-xs text-gray-600 dark:text-gray-200"
+                                    >
+                                        Puedes optar por renovar tu suscripción
+                                        en cualquier momento y elegir una
+                                        modalidad de pago diferente. Tu
+                                        suscripción se renovará inmediatamente
+                                        en el momento de la renovación y la
+                                        cuota correspondiente a la nueva
+                                        modalidad de pago se aplicará.
+                                    </ul>
+                                    <li
+                                        class="mt-1 text-sm text-gray-800 dark:text-gray-400"
+                                    >
+                                        Renovación de la suscripción
+                                    </li>
+                                    <ul
+                                        class="mt-1 text-xs text-gray-600 dark:text-gray-200"
+                                    >
+                                        Al usar nuestro sitio web y suscribirte
+                                        a nuestra hermandad, aceptas estos
+                                        Términos de Servicio. Si no estás de
+                                        acuerdo con estos términos, por favor no
+                                        utilices nuestro sitio web o te
+                                        suscribas a nuestros servicios.
+                                    </ul>
+                                    <li
+                                        class="mt-1 text-sm text-gray-800 dark:text-gray-400"
+                                    >
+                                        Responsabilidades del suscriptor
+                                    </li>
+                                    <ul
+                                        class="mt-1 text-xs text-gray-600 dark:text-gray-200"
+                                    >
+                                        Como suscriptor, eres responsable de
+                                        mantener la confidencialidad de tu
+                                        cuenta y contraseña y de restringir el
+                                        acceso a tu computadora, y aceptas la
+                                        responsabilidad de todas las actividades
+                                        que ocurran bajo tu cuenta o contraseña.
+                                    </ul>
+                                    <li
+                                        class="mt-1 text-sm text-gray-800 dark:text-gray-400"
+                                    >
+                                        Cambios en los términos del servicio
+                                    </li>
+                                    <ul
+                                        class="mt-1 text-xs text-gray-600 dark:text-gray-200"
+                                    >
+                                        Nos reservamos el derecho de cambiar
+                                        estos Términos del Servicio en cualquier
+                                        momento. Te recomendamos revisar
+                                        regularmente estos términos para estar
+                                        al tanto de cualquier cambio.
+                                    </ul>
+                                </ol>
+                                <p
+                                    class="mt-1 text-sm font-semibold text-gray-800 dark:text-gray-400"
+                                >
+                                    Esperamos que disfrutes como cofrade del
+                                    Paso Blanco de Huercal-Overa en nuestra
+                                    hermandad y agradecemos tu apoyo continuo.
+                                    Tu contribución es invaluable para nosotros
+                                    y para nuestra misión.
+                                </p>
+                                <p
+                                    class="mt-1 font-semibold text-sm text-gray-800 dark:text-gray-400"
+                                >
+                                    Fecha de entrada en vigor: 24 de junio de
+                                    2023.
+                                </p>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </div>

@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-        return inertia('Products/IndexProduct');
+        $products = Product::all();
+        //dd($products);
+        return inertia('Products/IndexProduct', compact("products"));
     }
 }

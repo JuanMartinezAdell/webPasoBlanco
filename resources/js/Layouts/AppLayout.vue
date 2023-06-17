@@ -66,14 +66,14 @@ const logout = () => {
                                         Inicio
                                     </NavLink>
                                     <NavLink
-                                        :href="route('products.indexproduct')"
-                                        :active="route().current('products.*')"
+                                        :href="route('posts.indexpost')"
+                                        :active="route().current('posts.*')"
                                     >
                                         Blog
                                     </NavLink>
                                     <NavLink
-                                        :href="route('products.indexproduct')"
-                                        :active="route().current('products.*')"
+                                        :href="route('product.indexshop')"
+                                        :active="route().current('product.*')"
                                     >
                                         Tienda
                                     </NavLink>
