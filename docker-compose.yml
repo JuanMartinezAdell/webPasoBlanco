@@ -12,6 +12,7 @@ services:
         ports:
             - '${APP_PORT:-80}:80'
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+            - '9000:9000'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
@@ -96,20 +97,6 @@ services:
             - 'host.docker.internal:host-gateway'
         volumes:
             - '/dev/shm:/dev/shm'
-        networks:
-            - sail
-
-    nginx:
-        image: nginx:alpine
-        container_name: travellist-nginx
-        restart: unless-stopped
-        ports:
-            - '${APP_PORT:-80}:80'
-        volumes:
-            - .:/var/www/html
-            - ./docker-compose/nginx:/etc/nginx/conf.d
-        depends_on:
-            - laravel.test
         networks:
             - sail
 networks:
