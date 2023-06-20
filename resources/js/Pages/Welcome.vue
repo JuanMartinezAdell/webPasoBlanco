@@ -1,6 +1,8 @@
 <script setup>
 import { Head, Link, router } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
 
 import AuthenticationCardNew from "@/NewComponents/AuthenticationCardVue.vue";
 import AuthenticationCardLogoNew from "@/NewComponents/AuthenticationCardLogo.vue";
@@ -60,6 +62,29 @@ const collapses = ref([
         text: "Puedes hacer tus donativos a la Hermandad atraves tel:+24300 0000 📞 via Bizum",
     },
 ]);
+
+// Porbar esta parte no sale
+
+/*const authUser = computed(() => usePage().props.auth.user);
+const activeSub = computed(
+    () => authUser.value && authUser.value.subscription === "active"
+);
+
+const showComponent = computed(() => {
+    // Si el usuario no está autenticado, muestra el componente.
+    if (!authUser.value) {
+        console.log("no use page");
+        return true;
+    }
+    // Si el usuario está autenticado pero no tiene un plan activo, muestra el componente.
+    if (authUser.value && !activeSub.value) {
+        console.log("use page");
+        return true;
+    }
+    // En cualquier otro caso, no muestres el componente.
+    console.log("no use ningun if");
+    return false;
+});*/
 </script>
 
 <template>
@@ -191,14 +216,7 @@ const collapses = ref([
         </div>
 
         <!-- Seccion paga tu cuota -->
-        <div
-            class="bg-white dark:bg-gray-900"
-            v-show="
-                !$page.props.auth.user ||
-                ($page.props.auth.user &&
-                    $page.props.auth.user.subscription !== 'active')
-            "
-        >
+        <div class="bg-white dark:bg-gray-900" v-show="showComponent">
             <div class="container mx-auto px-6 py-8">
                 <h1
                     class="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl"
@@ -227,7 +245,6 @@ const collapses = ref([
                 </div>
             </div>
         </div>
-
         <!-- Seccion Noticias y titulares -->
         <section class="bg-white dark:bg-gray-900">
             <div class="container mx-auto px-6 py-10">
