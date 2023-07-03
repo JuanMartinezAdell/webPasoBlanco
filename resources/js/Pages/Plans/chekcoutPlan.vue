@@ -1,12 +1,12 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PrimaryButtonProces from "@/NewComponents/PrimaryButtonProces.vue";
+import SecundaryButton from "@/NewComponents/SecundaryButton.vue";
+
 import { onMounted, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 
 const stripeKey = import.meta.env.VITE_STRIPE_KEY;
-
-const checked = ref(false);
 
 const props = defineProps({
     intent: String,
@@ -17,6 +17,7 @@ const props = defineProps({
 });
 
 const formProcessing = ref(false);
+const checked = ref(false);
 
 onMounted(() => {
     const stripe = Stripe(`${stripeKey}`);
@@ -76,17 +77,6 @@ onMounted(() => {
 });
 </script>
 
-<script>
-import { ref } from "vue";
-
-export default {
-    setup() {
-        const checked = ref(false);
-        return { checked };
-    },
-};
-</script>
-
 <template>
     <AppLayout title="Chekcout">
         <div class="container py-20">
@@ -139,7 +129,13 @@ export default {
                             class="px-8 py-6 bg-gray-50 border-t border-gray-200"
                         >
                             <div class="flex justify-end">
+                                <PrimaryButtonProces v-show="!checked">
+                                    Por favor, lee los terminos y condiciones
+                                </PrimaryButtonProces>
+                            </div>
+                            <div class="flex justify-end">
                                 <PrimaryButtonProces
+                                    v-show="checked"
                                     id="card-button"
                                     :data-secret="intent"
                                     :data-slug="plan.slug"
@@ -148,11 +144,6 @@ export default {
                                     Pagar Cuota
                                 </PrimaryButtonProces>
                             </div>
-                            <!--div class="flex justify-end" v-else>
-                                <PrimaryButtonProces>
-                                    Por favor, lee los terminos y condiciones
-                                </PrimaryButtonProces>
-                            </!--div -->
                         </footer>
                     </section>
                     <section class="md:col-span-1 flex justify-between pt-10">
