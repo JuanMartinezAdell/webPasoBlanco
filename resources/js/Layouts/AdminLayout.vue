@@ -66,7 +66,7 @@ const logout = () => {
                     >
                         <img
                             class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
-                            src="../../image/logo/escudo.png"
+                            src="/image/logo/logopaso.png"
                         />
                         <span class="hidden md:block">ADMIN</span>
                     </div>

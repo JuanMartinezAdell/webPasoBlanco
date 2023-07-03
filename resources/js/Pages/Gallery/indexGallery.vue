@@ -47,7 +47,7 @@ import { Link } from "@inertiajs/vue3";
                             <Link href="/gallery/semanasanta">
                                 <img
                                     class="aspect-square w-full rounded-xl object-cover"
-                                    src="/image/gallery/cartel/CARTEL-SEMANA-SANTA-2023.png"
+                                    src="/image/gallery/cartel/CARTEL-SEMANA-SANTA-2023.jpg"
                                     alt=""
                                 />
 

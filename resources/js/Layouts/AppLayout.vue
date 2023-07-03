@@ -83,6 +83,30 @@ const logout = () => {
                                     >
                                         Galeria
                                     </NavLink>
+                                    <NavLink
+                                        :href="route('dashboard') + '#RRSS'"
+                                    >
+                                        RR SS
+                                    </NavLink>
+                                    <NavLink
+                                        :href="route('dashboard') + '#lecturas'"
+                                    >
+                                        Lecturas
+                                    </NavLink>
+                                    <NavLink
+                                        :href="
+                                            route('dashboard') + '#titulares'
+                                        "
+                                    >
+                                        Titulares
+                                    </NavLink>
+                                    <NavLink
+                                        :href="
+                                            route('dashboard') + '#contactanos'
+                                        "
+                                    >
+                                        Contactanos
+                                    </NavLink>
                                 </div>
                             </div>
 
@@ -364,17 +388,44 @@ const logout = () => {
                                 Inicio
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
-                                :href="route('products.indexproduct')"
-                                :active="route().current('products.*')"
+                                :href="route('posts.indexpost')"
+                                :active="route().current('posts.*')"
+                            >
+                                Blog
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('product.indexshop')"
+                                :active="route().current('product.*')"
                             >
                                 Tienda
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
-                                :href="route('articles.indexarticle')"
-                                :active="route().current('articles.*')"
+                                :href="route('gallery.indexgallery')"
+                                :active="route().current('gallery.*')"
+                            >
+                                Galeria
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('dashboard') + '#RRSS'"
+                            >
+                                RR SS
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('dashboard') + '#lecturas'"
+                            >
+                                Lecturas
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('dashboard') + '#titulares'"
                             >
                                 Titulares
                             </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('dashboard') + '#contactanos'"
+                            >
+                                Contactanos
+                            </ResponsiveNavLink>
+
                             <div>
                                 <div v-if="!$page.props.auth.user">
                                     <!-- Contenido para usuarios no autenticados -->
@@ -627,7 +678,7 @@ const logout = () => {
                         class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
                     >
                         <img
-                            src="../../image/logo/logo.jpg"
+                            src="/image/logo/logopaso.png"
                             alt="logo Paso Blanco"
                             width="100"
                             height="100"

@@ -44,42 +44,39 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware([
+/* Controlar el acceso a toda la web logueado*/
+/*Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    Route::get('/welcome', function () {
-        $plans = Plan::where('is_free', false)
-            ->orderBy('price', 'asc')
-            ->get();
-        return Inertia::render('Welcome', [
-            'products' => Product::take(3)->get(),
-            'plans' => $plans,
-        ]);
-    })->name('dashboard');
+])->group(function () {*/
+Route::get('/welcome', function () {
+    $plans = Plan::where('is_free', false)
+        ->orderBy('price', 'asc')
+        ->get();
+    return Inertia::render('Welcome', [
+        'products' => Product::take(3)->get(),
+        'plans' => $plans,
+    ]);
+})->name('dashboard');
 
-    /*Route::get('/categories', [CategoryController::class, 'create'])
+/*Route::get('/categories', [CategoryController::class, 'create'])
         ->name('categories.createcategory');*/
 
-    //Route::resource('/categories', App\Http\Controllers\CategoryController::class);
-});
+//Route::resource('/categories', App\Http\Controllers\CategoryController::class);
+//});
 
-Route::group(['middleware' => [
+/*Route::group(['middleware' => [
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ]], function () {
 
     //Route::resource('/category', App\Http\Controllers\CategoryController::class);
-    Route::get('/gallery',  [GalleryController::class, 'index'])->name('gallery.indexgallery');
-    Route::get('/gallery/semanasanta', [GalleryController::class, 'showsanta'])->name('gallery.showsanta');
-    Route::get('/gallery/semanasanta/banderas', [GalleryController::class, 'showbanderas'])->name('gallery.showbanderas');
-    Route::get('/gallery/semanasanta/romanos', [GalleryController::class, 'showromanos'])->name('gallery.showromanos');
-
-    Route::get('/shop',  [ProductController::class, 'index'])->name('product.indexshop');
-
-    Route::get('/posts',  [PostController::class, 'index'])->name('posts.indexpost');
+    //Route::get('/gallery',  [GalleryController::class, 'index'])->name('gallery.indexgallery');
+    //Route::get('/gallery/semanasanta', [GalleryController::class, 'showsanta'])->name('gallery.showsanta');
+    //Route::get('/gallery/semanasanta/banderas', [GalleryController::class, 'showbanderas'])->name('gallery.showbanderas');
+    //Route::get('/gallery/semanasanta/romanos', [GalleryController::class, 'showromanos'])->name('gallery.showromanos');
 
     Route::get('/category', [CategoryController::class, 'index'])->name('categories.indexcategory');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('categories.createcategory');
@@ -95,9 +92,19 @@ Route::group(['middleware' => [
     Route::put('/article/{article}/edit', [ArticleController::class, 'update'])->name('articles.update');
     Route::get('/article/{article}/delete', [ArticleController::class, 'destroy'])->name('articles.destroy');
     Route::post('/article/upload/{article}', [ArticleController::class, 'upload'])->name('articles.upload');
-});
+});*/
+
+/*-- Ruta galeria de imagenes --*/
+Route::get('/gallery',  [GalleryController::class, 'index'])->name('gallery.indexgallery');
+Route::get('/gallery/semanasanta', [GalleryController::class, 'showsanta'])->name('gallery.showsanta');
+Route::get('/gallery/semanasanta/banderas', [GalleryController::class, 'showbanderas'])->name('gallery.showbanderas');
+Route::get('/gallery/semanasanta/romanos', [GalleryController::class, 'showromanos'])->name('gallery.showromanos');
 
 Route::get('/products', [StripeController::class, 'createCheckoutSession'])->name('products.indexproduct');
+
+Route::get('/shop',  [ProductController::class, 'index'])->name('product.indexshop');
+
+Route::get('/posts',  [PostController::class, 'index'])->name('posts.indexpost');
 
 /* Fin venta */
 
@@ -111,7 +118,7 @@ Route::prefix('billings')->middleware('auth')->group(function () {
 
 //Subcripciones
 
-Route::get('/subscription-plan', [PlanViewController::class, 'showSubscriptionPlan'])->name('subscription.plan');
+//Route::get('/subscription-plan', [PlanViewController::class, 'showSubscriptionPlan'])->name('subscription.plan');
 
 Route::prefix('plans')->middleware('auth')->group(function () {
     Route::controller(PlanViewController::class)->group(function () {
@@ -121,5 +128,6 @@ Route::prefix('plans')->middleware('auth')->group(function () {
         Route::post('{slug}', 'createSubcription')->name('subcription.payment');
         Route::get('subscription', 'showActiveSubscription')->name('subscription.show');
         Route::delete('subscription/{slug}', 'cancelSubscription')->name('subscription.cancel');
+        Route::get('/subscription-plan', 'showSubscriptionPlan')->name('subscription.plan');
     });
 });
